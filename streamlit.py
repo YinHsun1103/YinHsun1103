@@ -5,13 +5,15 @@ import numpy as np
 from PIL import Image
 import streamlit as st
 
+
+
 # 初始化状态信息
 state = st.session_state
 if "selected_tab" not in state:
     state.selected_tab = "页面1"
 
 # 创建选项卡
-tabs = ["页面1", "页面2", "页面3"]
+tabs = ["页面1", "页面2"]
 state.selected_tab = st.sidebar.radio("选择页面", tabs)
 
 # 页面内容
@@ -21,12 +23,17 @@ if state.selected_tab == "页面1":
 
 elif state.selected_tab == "页面2":
     st.title("页面2")
-    st.write("这是页面2的内容。")
+    
+    # 生成数据
+    date_rng = pd.date_range(start='2023-01-01', end='2023-01-20', freq='D')
+    data = {
+        "日期": date_rng,
+        "A產品": np.random.randint(1000, 5000, len(date_rng)),
+        "B產品": np.random.randint(1000, 5000, len(date_rng))
+    }
 
-elif state.selected_tab == "页面3":
-    st.title("页面3")
-    st.write("这是页面3的内容。")
-
+    # 显示线形图
+    st.line_chart(data, x="日期", y=["A產品", "B產品"])
 
 
 # 设置应用标题
