@@ -117,8 +117,8 @@ data = {
 st.json(data)
 
 # Displaying an image
-image = Image.open('girl.jpg')
-st.image(image, caption='這是DALL-E 3，做出來的日式漫畫風美少女，可以參考龍龍DALL-E 3的教程')
+image = Image.open('S__24829963.jpg')
+st.image(image, caption='這是一隻阿拉斯加的照片')
 
 # Closing remarks
 st.write("希望這些示例有助於您建立令人印象深刻的 Streamlit 網頁！")
