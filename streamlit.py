@@ -4,24 +4,27 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 
+# 初始化状态信息
+state = st.session_state
+if "page" not in state:
+    state.page = "page1"
 
+# 创建按钮以切换页面
+if st.button("页面1"):
+    state.page = "page1"
 
-# 创建选项卡
-tabs = ["页面1", "页面2", "页面3"]
-selected_tab = st.sidebar.radio("选择页面", tabs)
+if st.button("页面2"):
+    state.page = "page2"
 
-# 页面内容
-if selected_tab == "页面1":
+# 根据当前页面显示内容
+if state.page == "page1":
     st.title("页面1")
     st.write("这是页面1的内容。")
 
-elif selected_tab == "页面2":
+elif state.page == "page2":
     st.title("页面2")
     st.write("这是页面2的内容。")
 
-elif selected_tab == "页面3":
-    st.title("页面3")
-    st.write("这是页面3的内容。")
 
 
 
