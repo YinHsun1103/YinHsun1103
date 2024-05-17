@@ -361,8 +361,3 @@ genre = st.sidebar.radio(
     captions=["笑到不行。", "準備好爆米花。", "永不停止學習。"])
 
 
-st.sidebar.link_button("前往奇摩首頁", "https://tw.yahoo.com",type="primary",help="hello my friend") 
-st.sidebar.link_button("前往龍龍的教學頻道", "   / @changlunglung  ",disabled=True)
-
-
-
