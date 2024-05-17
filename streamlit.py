@@ -5,10 +5,8 @@ import numpy as np
 from PIL import Image
 import streamlit as st
 
-
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 # 初始化状态信息
 state = st.session_state
@@ -28,7 +26,7 @@ elif state.selected_tab == "页面2":
     st.title("页面2")
     
     # 设置应用标题
-    st.title("上传CSV文件")
+    st.title("上传CSV文件并绘制折线图")
 
     # 添加说明文本
     st.write("请上传您的CSV文件.")
@@ -44,8 +42,11 @@ elif state.selected_tab == "页面2":
         st.write("以下是您上传的数据：")
         st.write(df)
 
+        # 选择要绘制的列
+        selected_column = st.selectbox("选择要绘制的列", df.columns)
+
         # 绘制折线图
-        st.line_chart(df)
+        st.line_chart(df[selected_column])
 
 
 
