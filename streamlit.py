@@ -285,3 +285,14 @@ with open("girl.jpg", "rb") as file:
             file_name="dl_girl.jpg",
             mime="image/png"
           )
+
+
+
+#下載圖片
+with open("S__24829963.jpg", "rb") as file:
+    btn = st.download_button(
+            label="下載圖片",
+            data=file,
+            file_name="阿拉斯加.jpg",
+            mime="image/png"
+          )
