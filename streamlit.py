@@ -8,14 +8,15 @@ import streamlit as st
 # 初始化状态信息
 state = st.session_state
 if "selected_tab" not in state:
-    state.selected_tab = "練習Strwamlit"
+    state.selected_tab = "页面1"
 
 # 创建选项卡
-tabs = ["練習Strwamlit", "HomeWork1"]
+tabs = ["页面1", "页面2"]
 if "selected_tab" not in state:
-    state.selected_tab = tabs[0]
+    state.selected_tab = st.sidebar.radio("選擇頁面", tabs)
 else:
     state.selected_tab = st.sidebar.radio("選擇頁面", tabs, index=tabs.index(state.selected_tab))
+
 
 # 页面内容
 if state.selected_tab == "練習Strwamlit":
