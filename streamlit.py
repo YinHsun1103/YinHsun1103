@@ -61,7 +61,7 @@ st.divider()
 st.write("慘了，我被夾在分隔線中間！")
 st.divider()
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------
 
 df = pd.DataFrame(np.random.randn(10, 10), columns=("col %d" % i for i in range(10)))
 st.dataframe(df)  # Same as st.write(df)
@@ -94,39 +94,25 @@ st.dataframe(
 
 use_container_width=True
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 
-
-st.table
 df = pd.DataFrame(np.random.randn(5, 10), columns=("col %d" % i for i in range(10)))
 st.dataframe(df)  # Same as st.write(df)
-
-df = pd.DataFrame(np.random.randn(5, 10), columns=("col %d" % i for i in range(10)))
 st.table(df)  # Same as st.write(df)
 
-df
-
-
-
+# Metrics
 st.metric(label="溫度", value="30 °C", delta="1.2 °C")
-
 
 col1, col2, col3 = st.columns(3)
 col1.metric("溫度", "30 °C", "1.2 °C")
 col2.metric("風力", "9 mph", "-8%")
 col3.metric("濕度", "86%", "4%")
 
+st.metric(label="金價", value=3580, delta=-250, delta_color="inverse")
+st.metric(label="聯發科", value=1100, delta=80, delta_color="inverse")
+st.metric(label="台積電", value=512, delta=0, delta_color="off")
 
-
-st.metric(label="金價", value=3580, delta=-250,
-    delta_color="inverse")
-
-st.metric(label="聯發科", value=1100, delta=80,
-    delta_color="inverse")
-
-st.metric(label="台積電", value=512, delta=0,
-    delta_color="off")
-
-
+# JSON display
 data = {
     '姓名': '王小明',
     '年齡': 30,
@@ -141,21 +127,11 @@ data = {
         '旅遊',
     ],
 }
-
 st.json(data)
 
-
+# Displaying an image
 image = Image.open('girl.jpg')
-
 st.image(image, caption='這是DALL-E 3，做出來的日式漫畫風美少女，可以參考龍龍DALL-E 3的教程')
 
-
-
-
-
-
-
-
-
-#添加中文註解
+# Closing remarks
 st.write("希望這些示例有助於您建立令人印象深刻的 Streamlit 網頁！")
