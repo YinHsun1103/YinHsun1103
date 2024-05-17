@@ -346,12 +346,6 @@ if state.selected_tab == "页面1":
 
 
 
-
-
-
-
-
-
 elif state.selected_tab == "页面2":
     st.title("页面2")
     # 设置应用标题
@@ -371,45 +365,28 @@ elif state.selected_tab == "页面2":
         st.write("以下是您上傳的數據：")
         st.write(df)
 
-        # 選擇要繪製的列
+        # 让用户选择要绘制的列
         selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
-        # 繪製折線圖
+        # 绘制折线图
         st.subheader("折線圖")
         st.write("以下是", selected_column, "的折線圖：")
         st.line_chart(df[selected_column])
 
-        # 面積圖
-        chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+        # 绘制面积图
         st.subheader("面積圖")
-        st.write("以下是隨機數據的面積圖：")
-        st.area_chart(chart_data)
+        st.write("以下是", selected_column, "的面積圖：")
+        st.area_chart(df[selected_column])
         
-        # 長條圖
+        # 绘制条形图
         st.subheader("長條圖")
-        st.write("以下是隨機數據的長條圖：")
-        st.bar_chart(chart_data)
+        st.write("以下是", selected_column, "的長條圖：")
+        st.bar_chart(df[selected_column])
 
-        # 折線圖
-        st.subheader("折線圖")
-        st.write("以下是隨機數據的折線圖：")
-        st.line_chart(chart_data)
-
-        # 散點圖
+        # 绘制散点图
         st.subheader("散點圖")
-        st.write("以下是隨機數據的散點圖：")
-        st.scatter_chart(chart_data)
-
-
-
-
-
-
-
-
-
-
-
+        st.write("以下是", selected_column, "的散點圖：")
+        st.scatter_chart(df[selected_column])
 
 
 
