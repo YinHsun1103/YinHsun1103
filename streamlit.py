@@ -284,3 +284,18 @@ if st.button('確認密碼'):
         st.write('密碼正確！歡迎您進入系統。')
     else:
         st.write('密碼錯誤，請檢查後重新輸入。')
+
+
+st.title('創意文字分析應用')
+
+st.write('在下方的文字區域中，輸入您的奇幻故事，然後按下確認按鈕。')
+
+story_text = st.text_area('輸入您的奇幻故事', max_chars=100)
+
+if st.button("確認"):
+    if story_text:
+        words = story_text.split(" ")
+        word_count = len(words)
+        st.write(f'您的故事中包含了 {word_count} 個奇幻單詞！')
+    else:
+        st.write('請先輸入您的奇幻故事再按下確認按鈕。')
