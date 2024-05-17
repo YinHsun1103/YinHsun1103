@@ -3,7 +3,7 @@ import random
 import pandas as pd
 import numpy as np
 from PIL import Image
-import matplotlib.pyplot as plt
+
 
 # Page title and initial text
 st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
