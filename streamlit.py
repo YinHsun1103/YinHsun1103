@@ -366,7 +366,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
    st.header("阿拉斯加")
-   st.image("01.jpg")
+   st.image("S__24829963.jpg")
 
 with col2:
    st.header("邊境牧羊犬")
