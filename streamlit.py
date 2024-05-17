@@ -195,3 +195,18 @@ st.scatter_chart(df,
     x='體重',y='身高',color='學生姓名')
 
 
+st.pyplot
+Streamlit Version
+v1.28.0
+Display a matplotlib.pyplot figure.
+
+
+import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+
+arr = np.random.normal(1, 1, size=100)
+fig, ax = plt.subplots()
+ax.hist(arr, bins=20)
+
+st.pyplot(fig)
