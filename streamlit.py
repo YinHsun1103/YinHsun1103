@@ -272,17 +272,3 @@ st.download_button(
     file_name='large_df.csv',
     mime='text/csv'
 )
-
-
-#單純的將文字下載，並存成txt檔
-text_contents = '''這就是單純的將文字下載，並存成txt檔'''
-st.download_button('將文字下載', text_contents)
-
-#下載圖片
-with open("girl.jpg", "rb") as file:
-    btn = st.download_button(
-            label="下載圖片",
-            data=file,
-            file_name="dl_girl.jpg",
-            mime="image/png"
-          )
