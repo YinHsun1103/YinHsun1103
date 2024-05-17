@@ -221,9 +221,7 @@ st.pyplot(fig)：最後，這行代碼使用Streamlit的st.pyplot函數將Matplo
 
 
 #地圖的說明
-import streamlit as st
-import pandas as pd
-import numpy as np
+
 
 df = pd.DataFrame(
     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
