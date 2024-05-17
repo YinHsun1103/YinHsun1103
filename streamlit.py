@@ -308,12 +308,17 @@ st.write('您輸入的是:', number)
 
 import datetime
 
+# Set application title
 st.title('生日輸入應用')
 
+# Add description text
 st.write('請輸入您的生日日期，然後按下確認按鈕。')
 
+# Create date input box
 birthday = st.date_input("您的生日日期", datetime.date(1990, 1, 1))
 
-if st.button('確認'):
-
+# Create confirmation button with a unique ID
+if st.button('確認生日'):
+    # Display the birthday date
     st.write('您的生日是：', birthday.strftime('%Y年%m月%d日'))
+
