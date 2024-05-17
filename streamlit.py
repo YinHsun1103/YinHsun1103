@@ -338,36 +338,44 @@ if state.selected_tab == "页面1":
     with tab3:
         st.header("柴犬")
         st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
-    
-
-
-
-
-elif state.selected_tab == "页面2":
+  elif state.selected_tab == "页面2":
     st.title("页面2")
-    # 在这里放置页面2的内容
     # 设置应用标题
-    st.title("上传CSV文件并绘制折线图")
+    st.title("上傳CSV文件並繪製圖表")
 
-    # 添加说明文本
-    st.write("请上传您的CSV文件.")
+    # 添加說明文本
+    st.write("請上傳您的CSV文件.")
 
-    # 文件上传部分
-    file = st.file_uploader("选择文件", type=['csv'])
+    # 文件上傳部分
+    file = st.file_uploader("選擇文件", type=['csv'])
 
     if file is not None:
-        # 读取上传的CSV文件
+        # 讀取上傳的CSV文件
         df = pd.read_csv(file)
 
-        # 显示数据
-        st.write("以下是您上传的数据：")
+        # 顯示數據
+        st.write("以下是您上傳的數據：")
         st.write(df)
 
-        # 选择要绘制的列
-        selected_column = st.selectbox("选择要绘制的列", df.columns)
+        # 選擇要繪製的列
+        selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
-        # 绘制折线图
+        # 繪製折線圖
         st.line_chart(df[selected_column])
+
+        # 面積圖
+        chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+        st.area_chart(chart_data)
+        
+        # 長條圖
+        st.bar_chart(chart_data)
+
+        # 折線圖
+        st.line_chart(chart_data)
+
+        # 散點圖
+        st.scatter_chart(chart_data)
+
 
 
 
