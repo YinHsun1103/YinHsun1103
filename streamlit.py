@@ -7,7 +7,7 @@ import streamlit as st
 # 初始化状态信息
 state = st.session_state
 if "selected_tab" not in state:
-    state.selected_tab = "页面1"
+    state.selected_tab = "練習Streamlit"
 
 # 创建选项卡
 tabs = ["練習Streamlit", "页面2"]
@@ -17,8 +17,8 @@ else:
     state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
 
 # 页面内容
-if state.selected_tab == "页面1":
-    st.title("页面1")
+if state.selected_tab == "練習Streamlit":
+    st.title("練習Streamlit")
 
     # 在这里放置页面1的内容
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
