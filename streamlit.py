@@ -4,23 +4,22 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 import streamlit as st
-
 # 初始化状态信息
 state = st.session_state
 if "selected_tab" not in state:
-    state.selected_tab = "页面1"
+    state.selected_tab = "練習Strwamlit"
 
 # 创建选项卡
-tabs = ["页面1", "页面2"]
+tabs = ["練習Strwamlit", "HomeWork1"]
 if "selected_tab" not in state:
-    state.selected_tab = st.sidebar.radio("選擇頁面", tabs)
+    state.selected_tab = tabs[0]
 else:
     state.selected_tab = st.sidebar.radio("選擇頁面", tabs, index=tabs.index(state.selected_tab))
-
 
 # 页面内容
 if state.selected_tab == "練習Strwamlit":
     st.title("練習Strwamlit")
+
 
 
     # 在这里放置页面1的内容
@@ -346,9 +345,9 @@ if state.selected_tab == "練習Strwamlit":
 
 
 
-elif state.selected_tab == "页面2":
-    st.title("页面2")
-    # 在这里放置页面2的内容
+elif state.selected_tab == "HomeWork1":
+    st.title("HomeWork1")
+    # 在这里放置HomeWork1的内容
     # 设置应用标题
     st.title("上传CSV文件并绘制折线图")
 
