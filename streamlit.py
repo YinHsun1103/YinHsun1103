@@ -338,7 +338,8 @@ if state.selected_tab == "页面1":
     with tab3:
         st.header("柴犬")
         st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
-  elif state.selected_tab == "页面2":
+        
+elif state.selected_tab == "页面2":
     st.title("页面2")
     # 设置应用标题
     st.title("上傳CSV文件並繪製圖表")
