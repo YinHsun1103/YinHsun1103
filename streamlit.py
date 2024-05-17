@@ -296,6 +296,6 @@ if st.button("確認"):
     if story_text:
         words = story_text.split(" ")
         word_count = len(words)
-        st.write(f'您的故事中包含了 {word_count} 個奇幻單詞！')
+        st.write(f'您的故事中包含了 {word_count} 3段文字！')
     else:
         st.write('請先輸入您的奇幻故事再按下確認按鈕。')
