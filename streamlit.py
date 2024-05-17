@@ -370,7 +370,7 @@ with col1:
 
 with col2:
    st.header("邊境牧羊犬")
-   st.image("02.jpg")
+   st.image("images.jpg")
 
 with col3:
    st.header("柴犬")
