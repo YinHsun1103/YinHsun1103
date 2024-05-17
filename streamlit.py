@@ -303,5 +303,5 @@ if st.button("確認"):
 number = st.number_input('輸入一個數字')
 st.writer('您輸入的是',number)
 
-number = st.number_input('輸入一個數字',value=None,placeholder='請在這裡輸入...')
-st.writer('您輸入的是',number)
+number = st.number_input('輸入一個數字', value=None, placeholder='請在這裡輸入...')
+st.write('您輸入的是:', number)
