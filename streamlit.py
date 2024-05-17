@@ -135,3 +135,47 @@ st.area_chart(chart_data)
 st.area_chart(
    chart_data, x="a", y=["b", "c"], color=["#FF0000", "#00FF00"]  # Optional
 )
+
+
+#長條圖
+st.bar_chart(chart_data)
+
+
+chart_data = pd.DataFrame(
+   {"col1": list(range(20)), "col2": np.random.randn(20), "col3": np.random.randn(20)}
+)
+
+st.bar_chart(
+   chart_data, x="col1", y=["col2", "col3"], color=["#00FF00", "#0000FF"]  # Optional
+)
+
+
+#折線圖
+date_rng = pd.date_range(start='2023-01-01', end='2023-01-20', freq='D')
+data = {
+    "日期": date_rng,
+    "A產品": np.random.randint(1000, 5000, len(date_rng)),
+    "B產品": np.random.randint(1000, 5000, len(date_rng))
+}
+
+st.line_chart(data, x="日期", y=["A產品","B產品"])
+st.line_chart(data, x="日期", y=["A產品","B產品"], color=["#FF0000", "#00FF00"])
+
+
+#散點圖
+
+chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+
+st.scatter_chart(chart_data)
+
+#加上size大小變化
+chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["col1", "col2", "col3"])
+chart_data['col4'] = np.random.choice(['A','B','C'], 20)
+
+st.scatter_chart(
+    chart_data,
+    x='col1',
+    y='col2',
+    color='col4',
+    size='col3',
+)
