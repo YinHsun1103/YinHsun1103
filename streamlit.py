@@ -13,8 +13,7 @@ if "selected_tab" not in state:
 tabs = ["練習Strwamlit", "HomeWork1"]
 if "selected_tab" not in state:
     state.selected_tab = tabs[0]
-else:
-    state.selected_tab = st.sidebar.radio("選擇頁面", tabs, index=tabs.index(state.selected_tab))
+
 
 # 页面内容
 if state.selected_tab == "練習Strwamlit":
