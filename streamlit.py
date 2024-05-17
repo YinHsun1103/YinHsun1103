@@ -4,25 +4,20 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 
-
-# Page title and initial text
 st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
 st.write('我是一個字串')
 K = 9999
 st.write(K)
 
-# Displaying a dataframe with random numbers
 dataframe = np.random.randn(10, 20)
 st.write(dataframe)
 
-# Markdown examples
 st.markdown("# 這是一個示例 Streamlit 網頁")
 st.markdown('''
     :red[Streamlit] :orange[can] :green[write] :blue[text] :violet[in]
     :gray[pretty] :rainbow[colors].''')
 st.markdown("Here's a bouquet &mdash; #:tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:")    
 
-# Titles, headers, and subheaders
 st.title("歡迎來到我的網站")
 st.title('_Streamlit_ is :blue[cool] :sunglasses:')
 st.header("這是一個標頭", divider='rainbow')
@@ -30,21 +25,17 @@ st.header('_Streamlit_ is :blue[cool] :sunglasses:')
 st.subheader("這是一個子標頭", divider='rainbow')
 st.subheader('_Streamlit_ is :blue[cool] :sunglasses:')
 
-# Captions
 st.caption("這是一張美麗的圖片")
 st.caption('A caption with italics :blue[colors] and emojis :sunglasses:')
 
-# Displaying code
 st.code("print('Hello, Streamlit!')")
 code = '''def hello():
     print("Hello, Streamlit!")'''
 st.code(code, line_numbers=True)    
 st.code(code, language='python')
 
-# Plain text
 st.text("這是一些純文字內容。")
 
-# LaTeX expressions
 st.latex(r"e^{i\pi} + 1 = 0")
 st.latex(r'''
     a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
@@ -52,7 +43,6 @@ st.latex(r'''
     a \left(\frac{1-r^{n}}{1-r}\right)
     ''')
 
-# Dividers
 st.divider()
 st.write("慘了，我被夾在分隔線中間！")
 st.divider()
@@ -125,9 +115,7 @@ st.image(image, caption='這是一隻阿拉斯加的照片')
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
-
 #面積圖
-
 chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
 st.area_chart(chart_data)
@@ -136,10 +124,8 @@ st.area_chart(
    chart_data, x="a", y=["b", "c"], color=["#FF0000", "#00FF00"]  # Optional
 )
 
-
 #長條圖
 st.bar_chart(chart_data)
-
 
 chart_data = pd.DataFrame(
    {"col1": list(range(20)), "col2": np.random.randn(20), "col3": np.random.randn(20)}
@@ -148,7 +134,6 @@ chart_data = pd.DataFrame(
 st.bar_chart(
    chart_data, x="col1", y=["col2", "col3"], color=["#00FF00", "#0000FF"]  # Optional
 )
-
 
 #折線圖
 date_rng = pd.date_range(start='2023-01-01', end='2023-01-20', freq='D')
@@ -160,7 +145,6 @@ data = {
 
 st.line_chart(data, x="日期", y=["A產品","B產品"])
 st.line_chart(data, x="日期", y=["A產品","B產品"], color=["#FF0000", "#00FF00"])
-
 
 #散點圖
 
@@ -180,7 +164,6 @@ st.scatter_chart(
     size='col3',
 )
 
-
 #創建身高和體重的散點圖
 students = ["學生A", "學生B", "學生C", "學生D", "學生E", "學生F", "學生G", "學生H", "學生I", "學生J",
             "學生K", "學生L", "學生M", "學生N", "學生O", "學生P", "學生Q", "學生R", "學生S", "學生T"]
@@ -193,7 +176,6 @@ df = pd.DataFrame({"學生姓名": students, "身高": heights, "體重": weight
 df = pd.DataFrame(df)
 st.scatter_chart(df,
     x='體重',y='身高',color='學生姓名')
-
 
 #地圖的說明
 
@@ -232,7 +214,6 @@ st.map(df_boundaries,
     latitude='南緯度',
     longitude='西經度', size=100, color='#0044ff')
 
-
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
 #按鈕
@@ -250,7 +231,6 @@ st.link_button("前往台中科大首頁", "https://www.nutc.edu.tw/",disabled=T
 
 
 #下載按鈕download button
-
 #dataframe下載成csv
 data = {
     'Column1': [1, 2, 3, 4, 5],
@@ -277,9 +257,6 @@ st.download_button(
 text_contents = '''這就是單純的將文字下載，並存成txt檔'''
 st.download_button('將文字下載', text_contents)
 
-
-
-
 #下載圖片
 with open("S__24829963.jpg", "rb") as file:
     btn = st.download_button(
@@ -288,3 +265,16 @@ with open("S__24829963.jpg", "rb") as file:
             file_name="阿拉斯加.jpg",
             mime="image/png"
           )
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+
+st.title('電影標題輸人應用')
+
+st.write('請在下方輸人電影標選，然後按下確認按鈕。')
+
+movie_title = st.text_input('輸入電影標題', '今夜作學也會笑')
+
+if st.button('確認'):
+
+    st.write('您選擇的電影標題是：', movie_title)
+
