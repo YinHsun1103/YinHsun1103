@@ -6,6 +6,9 @@ from PIL import Image
 import streamlit as st
 
 
+import streamlit as st
+import pandas as pd
+import numpy as np
 
 # 初始化状态信息
 state = st.session_state
@@ -24,34 +27,25 @@ if state.selected_tab == "页面1":
 elif state.selected_tab == "页面2":
     st.title("页面2")
     
-    # 生成数据
-    date_rng = pd.date_range(start='2023-01-01', end='2023-01-20', freq='D')
-    data = {
-        "日期": date_rng,
-        "A產品": np.random.randint(1000, 5000, len(date_rng)),
-        "B產品": np.random.randint(1000, 5000, len(date_rng))
-    }
+    # 设置应用标题
+    st.title("上传CSV文件")
 
-    # 显示线形图
-    st.line_chart(data, x="日期", y=["A產品", "B產品"])
+    # 添加说明文本
+    st.write("请上传您的CSV文件.")
 
+    # 文件上传部分
+    file = st.file_uploader("选择文件", type=['csv'])
 
-# 设置应用标题
-st.title("上传CSV文件")
+    if file is not None:
+        # 读取上传的CSV文件
+        df = pd.read_csv(file)
 
-# 添加说明文本
-st.write("请上传您的CSV文件.")
+        # 显示数据
+        st.write("以下是您上传的数据：")
+        st.write(df)
 
-# 文件上传部分
-file = st.file_uploader("选择文件", type=['csv'])
-
-if file is not None:
-    # 读取上传的CSV文件
-    df = pd.read_csv(file)
-    
-    # 显示数据
-    st.write("以下是您上传的数据：")
-    st.write(df)
+        # 绘制折线图
+        st.line_chart(df)
 
 
 
