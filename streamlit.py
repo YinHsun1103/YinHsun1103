@@ -280,7 +280,7 @@ st.write('請在下方輸入您的密碼，然後按下確認按鈕。')
 password = st.text_input('輸入密碼', type='password')
 if st.button('確認密碼'):
     # 檢查密碼是否正確
-    if password == '98888888':  # 將'98888888'替換為您的實際密碼
+    if password == '88888888':  # 將'88888888'替換為您的實際密碼
         st.write('密碼正確！歡迎您進入系統。')
     else:
         st.write('密碼錯誤，請檢查後重新輸入。')
