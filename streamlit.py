@@ -195,8 +195,6 @@ st.scatter_chart(df,
     x='體重',y='身高',color='學生姓名')
 
 
-
-
 #地圖的說明
 
 df = pd.DataFrame(
@@ -204,8 +202,6 @@ df = pd.DataFrame(
     columns=['lat', 'lon'])
 
 st.map(df)
-
-
 
 #定義台北市各區域的邊界座標
 taipei_boundaries = {
@@ -235,3 +231,60 @@ st.map(df_boundaries,
 st.map(df_boundaries,
     latitude='南緯度',
     longitude='西經度', size=100, color='#0044ff')
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+
+#按鈕
+st.button("重設",type="primary")
+if (st.button(":100:我是一個按鈕")):
+    st.write("現在按下的是「我是一個按鈕」！！！")
+if (st.button("這是第二個按鈕")):
+    st.write("現在按下的是「第二個按鈕」！！！")
+if (st.button(":dart:這是第二個按鈕")):
+    st.write("現在按下的是，帶有圖示的「第二個按鈕」！！！")
+
+#link button，連結按鈕
+st.link_button("前往奇摩首頁", "https://tw.yahoo.com",type="primary",help="hello my friend")
+st.link_button("前往龍龍的教學頻道", "  
+
+ / @changlunglung  ",disabled=True)
+
+
+#下載按鈕download button
+
+#dataframe下載成csv
+data = {
+    'Column1': [1, 2, 3, 4, 5],
+    'Column2': ['A', 'B', 'C', 'D', 'E']
+}
+my_large_df = pd.DataFrame(data)
+
+下載按鈕download button
+@st.cache_data
+def convert_df(df):
+    IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv(index=False).encode('utf-8')
+
+csv = convert_df(my_large_df)
+
+st.download_button(
+    label="dataframe下載成csv",
+    data=csv,
+    file_name='large_df.csv',
+    mime='text/csv'
+)
+
+
+#單純的將文字下載，並存成txt檔
+text_contents = '''這就是單純的將文字下載，並存成txt檔'''
+st.download_button('將文字下載', text_contents)
+
+#下載圖片
+with open("girl.jpg", "rb") as file:
+    btn = st.download_button(
+            label="下載圖片",
+            data=file,
+            file_name="dl_girl.jpg",
+            mime="image/png"
+          )
