@@ -7,7 +7,7 @@ import streamlit as st
 # 初始化状态信息
 state = st.session_state
 if "selected_tab" not in state:
-    state.selected_tab = "練習Streamlit"
+    state.selected_tab = "页面1"
 
 # 创建选项卡
 tabs = ["練習Streamlit", "页面2"]
