@@ -361,3 +361,17 @@ genre = st.sidebar.radio(
     captions=["笑到不行。", "準備好爆米花。", "永不停止學習。"])
 
 
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+   st.header("阿拉斯加")
+   st.image("01.jpg")
+
+with col2:
+   st.header("邊境牧羊犬")
+   st.image("02.jpg")
+
+with col3:
+   st.header("柴犬")
+   st.image("03.jpg")
