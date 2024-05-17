@@ -1,5 +1,9 @@
 import streamlit as st
+import random
 import pandas as pd
+import numpy as np
+from PIL import Image
+import streamlit as st
 
 # 初始化状态信息
 state = st.session_state
