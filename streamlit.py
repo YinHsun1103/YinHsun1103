@@ -1,9 +1,5 @@
 import streamlit as st
-import random
 import pandas as pd
-import numpy as np
-from PIL import Image
-import streamlit as st
 
 # 初始化状态信息
 state = st.session_state
@@ -12,25 +8,29 @@ if "selected_tab" not in state:
 
 # 创建选项卡
 tabs = ["页面1", "页面2"]
-state.selected_tab = st.sidebar.radio("选择页面", tabs)
+if "selected_tab" not in state:
+    state.selected_tab = st.sidebar.radio("选择页面", tabs)
+else:
+    state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
 
 # 页面内容
 if state.selected_tab == "页面1":
     st.title("页面1")
 
+    # 在这里放置页面1的内容
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
     st.write('我是一個字串')
     K = 9999
     st.write(K)
 
-    dataframe = np.random.randn(10, 20)
+    dataframe = pd.DataFrame(np.random.randn(10, 20))
     st.write(dataframe)
 
     st.markdown("# 這是一個示例 Streamlit 網頁")
     st.markdown('''
         :red[Streamlit] :orange[can] :green[write] :blue[text] :violet[in]
         :gray[pretty] :rainbow[colors].''')
-    st.markdown("Here's a bouquet &mdash; #:tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:")    
+    st.markdown("Here's a bouquet &mdash; #:tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:")
 
     st.title("歡迎來到我的網站")
     st.title('_Streamlit_ is :blue[cool] :sunglasses:')
@@ -60,8 +60,6 @@ if state.selected_tab == "页面1":
     st.divider()
     st.write("慘了，我被夾在分隔線中間！")
     st.divider()
-
-#-----------------------------------------------------------------------------------------------------------------------------------------
 
     df = pd.DataFrame(np.random.randn(10, 10), columns=("col %d" % i for i in range(10)))
     st.dataframe(df)  # Same as st.write(df)
@@ -93,8 +91,7 @@ if state.selected_tab == "页面1":
     )
     use_container_width=True
 
-
-# Metrics
+    # Metrics
     st.metric(label="溫度", value="30 °C", delta="1.2 °C")
 
     col1, col2, col3 = st.columns(3)
@@ -106,7 +103,7 @@ if state.selected_tab == "页面1":
     st.metric(label="聯發科", value=1100, delta=80, delta_color="inverse")
     st.metric(label="台積電", value=512, delta=0, delta_color="off")
 
-# JSON display
+    # JSON display
     data = {
         '姓名': '王小明',
         '年齡': 30,
@@ -127,79 +124,30 @@ if state.selected_tab == "页面1":
     image = Image.open('S__24829963.jpg')
     st.image(image, caption='這是一隻阿拉斯加的照片')
 
-#-----------------------------------------------------------------------------------------------------------------------------------------
-
-    #面積圖
+    # 面積圖
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
-
     st.area_chart(chart_data)
-
-    st.area_chart(
-       chart_data, x="a", y=["b", "c"], color=["#FF0000", "#00FF00"]  # Optional
-    )
-
-    #長條圖
+    
+    # 長條圖
     st.bar_chart(chart_data)
 
-    chart_data = pd.DataFrame(
-       {"col1": list(range(20)), "col2": np.random.randn(20), "col3": np.random.randn(20)}
-    )
+    # 折線圖
+    st.line_chart(chart_data)
 
-    st.bar_chart(
-       chart_data, x="col1", y=["col2", "col3"], color=["#00FF00", "#0000FF"]  # Optional
-    )
-
-    #折線圖
-    date_rng = pd.date_range(start='2023-01-01', end='2023-01-20', freq='D')
-    data = {
-        "日期": date_rng,
-        "A產品": np.random.randint(1000, 5000, len(date_rng)),
-        "B產品": np.random.randint(1000, 5000, len(date_rng))
-    }
-
-    st.line_chart(data, x="日期", y=["A產品","B產品"])
-    st.line_chart(data, x="日期", y=["A產品","B產品"], color=["#FF0000", "#00FF00"])
-
-    #散點圖
-
-    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
-
+    # 散點圖
     st.scatter_chart(chart_data)
 
-    #加上size大小變化
-chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["col1", "col2", "col3"])
-chart_data['col4'] = np.random.choice(['A','B','C'], 20)
+    # 加上size大小變化
+    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["col1", "col2", "col3"])
+    chart_data['col4'] = np.random.choice(['A', 'B', 'C'], 20)
+    st.scatter_chart(chart_data, x='col1', y='col2', color='col4', size='col3')
 
-    st.scatter_chart(
-        chart_data,
-        x='col1',
-        y='col2',
-        color='col4',
-        size='col3',
-    )
-
-    #創建身高和體重的散點圖
-    students = ["學生A", "學生B", "學生C", "學生D", "學生E", "學生F", "學生G", "學生H", "學生I", "學生J",
-                "學生K", "學生L", "學生M", "學生N", "學生O", "學生P", "學生Q", "學生R", "學生S", "學生T"]
-    heights = np.random.uniform(150, 190, len(students))  # 虛構身高數據，範圍在150到190之間
-    weights = np.random.uniform(45, 90, len(students))   # 虛構體重數據，範圍在45到90之間
-
-    df = pd.DataFrame({"學生姓名": students, "身高": heights, "體重": weights})
-
-
-    df = pd.DataFrame(df)
-    st.scatter_chart(df,
-        x='體重',y='身高',color='學生姓名')
-
-    #地圖的說明
-
-    df = pd.DataFrame(
-        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-        columns=['lat', 'lon'])
-
+    # 地圖的說明
+    df = pd.DataFrame(np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4], columns=['lat', 'lon'])
     st.map(df)
 
-    #定義台北市各區域的邊界座標
+    # 定義台北市
+
     taipei_boundaries = {
         "區域": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
         "西經度": [121.506623, 121.511034, 121.527879, 121.566173, 121.552743, 121.500144, 121.578663, 121.521708, 121.667708, 121.588943, 121.618678, 121.570432],
