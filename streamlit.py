@@ -10,7 +10,7 @@ if "selected_tab" not in state:
     state.selected_tab = "页面1"
 
 # 创建选项卡
-tabs = ["Steamlit练习", "页面2"]
+tabs = ["Steamlit练习", "HomeWork1"]
 if "selected_tab" not in state:
     state.selected_tab = st.sidebar.radio("选择页面", tabs)
 else:
@@ -347,8 +347,8 @@ if state.selected_tab == "Steamlit练习":
 
 
 
-elif state.selected_tab == "页面2":
-    st.title("页面2")
+elif state.selected_tab == "HomeWork1":
+    st.title("HomeWork1")
     # 设置应用标题
     st.title("上傳CSV文件並繪製圖表")
 
