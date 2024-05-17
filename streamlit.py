@@ -322,3 +322,14 @@ if st.button('確認生日'):
     # Display the birthday date
     st.write('您的生日是：', birthday.strftime('%Y年%m月%d日'))
 
+today = datetime.datetime. now ()
+next year = today. year + 1
+jan_1 = datetime. date(next_year, 1, 1)
+dec_31 = datetime. date(next_year, 12, 31)
+d = st. date input (
+“選擇明年要休假的期間”，
+(jan_1, datetime. date(next_year, 1, 7)), jan_ 1, dec
+_31,
+format= "YYYY. MM. DD",
+）
+d
