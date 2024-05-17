@@ -179,3 +179,25 @@ st.scatter_chart(
     color='col4',
     size='col3',
 )
+
+
+#創建身高和體重的散點圖
+students = ["學生A", "學生B", "學生C", "學生D", "學生E", "學生F", "學生G", "學生H", "學生I", "學生J",
+            "學生K", "學生L", "學生M", "學生N", "學生O", "學生P", "學生Q", "學生R", "學生S", "學生T"]
+heights = np.random.uniform(150, 190, len(students))  # 虛構身高數據，範圍在150到190之間
+weights = np.random.uniform(45, 90, len(students))   # 虛構體重數據，範圍在45到90之間
+
+df = pd.DataFrame({"學生姓名": students, "身高": heights, "體重": weights})
+
+
+df = pd.DataFrame(df)
+st.scatter_chart(df,
+    x='體重',y='身高',color='學生姓名')
+
+
+
+
+st.pyplot
+Streamlit Version
+v1.28.0
+Display a matplotlib.pyplot figure.
