@@ -340,15 +340,9 @@ with tab3:
 
 
 
-
-
-
-
-
-
 elif state.selected_tab == "页面2":
     st.title("页面2")
-    
+    # 在这里放置页面2的内容
     # 设置应用标题
     st.title("上传CSV文件并绘制折线图")
 
