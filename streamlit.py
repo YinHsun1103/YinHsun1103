@@ -10,7 +10,7 @@ if "selected_tab" not in state:
     state.selected_tab = "页面1"
 
 # 创建选项卡
-tabs = ["練習Streamlit", "页面2"]
+tabs = ["页面1", "页面2"]
 if "selected_tab" not in state:
     state.selected_tab = st.sidebar.radio("选择页面", tabs)
 else:
