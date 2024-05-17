@@ -6,7 +6,7 @@ K = 9999
 st.write(K)
 
 dotaframe = np.random.randn(10,20)
-st.write(dataframe)
+st.write(dotaframe)
 
 
 #網頁標題
