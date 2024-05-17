@@ -56,12 +56,10 @@ st.divider()
 st.write("慘了，我被夾在分隔線中間！")
 st.divider()
 
-# Displaying a styled dataframe
 df = pd.DataFrame(np.random.randn(10, 10), columns=("col %d" % i for i in range(10)))
 st.dataframe(df)  # Same as st.write(df)
 st.dataframe(df.style.highlight_max(axis=0))
 
-# Dataframe with specific columns
 df = pd.DataFrame(
     {
         "name": ["Roadmap", "Extras", "Issues"],
@@ -70,12 +68,24 @@ df = pd.DataFrame(
         "views_history": [[random.randint(0, 5000) for _ in range(30)] for _ in range(3)],
     }
 )
-st.write(df)  # Simplified to avoid issues with column_config
+st.dataframe(
+    df,
+    column_config={
+        "name": "App name",
+        "stars": st.column_config.NumberColumn(
+            "Github Stars",
+            help="Number of stars on GitHub",
+            format="%d ⭐",
+        ),
+        "url": st.column_config.LinkColumn("App URL"),
+        "views_history": st.column_config.LineChartColumn(
+            "Views (past 30 days)", y_min=0, y_max=5000
+        ),
+    },
+    hide_index=True
+)
+use_container_width=True
 
-# Displaying tables
-df = pd.DataFrame(np.random.randn(5, 10), columns=("col %d" % i for i in range(10)))
-st.dataframe(df)  # Same as st.write(df)
-st.table(df)  # Same as st.write(df)
 
 # Metrics
 st.metric(label="溫度", value="30 °C", delta="1.2 °C")
