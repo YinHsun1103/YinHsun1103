@@ -304,3 +304,16 @@ if st.button("確認"):
 
 number = st.number_input('輸入一個數字', value=None, placeholder='請在這裡輸入...',min_value=0,max_value=100)
 st.write('您輸入的是:', number)
+
+
+import datetime
+
+st.title('生日輸入應用')
+
+st.write('請輸入您的生日日期，然後按下確認按鈕。')
+
+birthday = st.date_input("您的生日日期", datetime.date(1990, 1, 1))
+
+if st.button('確認'):
+
+    st.write('您的生日是：', birthday.strftime('%Y年%m月%d日'))
