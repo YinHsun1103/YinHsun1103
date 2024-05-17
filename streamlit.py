@@ -374,4 +374,4 @@ with col2:
 
 with col3:
    st.header("柴犬")
-   st.image("03.jpg")
+   st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
