@@ -307,34 +307,34 @@ if state.selected_tab == "页面1":
 
 
 
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-with col1:
-   st.header("阿拉斯加")
-   st.image("S__24829963.jpg")
+    with col1:
+       st.header("阿拉斯加")
+       st.image("S__24829963.jpg")
 
-with col2:
-   st.header("邊境牧羊犬")
-   st.image("images.jpg")
+    with col2:
+       st.header("邊境牧羊犬")
+       st.image("images.jpg")
 
-with col3:
-   st.header("柴犬")
-   st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
+    with col3:
+       st.header("柴犬")
+       st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
 
 
-tab1, tab2, tab3 = st.tabs(["阿拉斯加", "邊境牧羊犬", "柴犬"])
-with tab1:
-    st.header("阿拉斯加")
-    st.image("S__24829963.jpg")
+    tab1, tab2, tab3 = st.tabs(["阿拉斯加", "邊境牧羊犬", "柴犬"])
+    with tab1:
+        st.header("阿拉斯加")
+        st.image("S__24829963.jpg")
 
-with tab2:
-    st.header("邊境牧羊犬")
-    st.image("images.jpg")
+    with tab2:
+        st.header("邊境牧羊犬")
+        st.image("images.jpg")
 
-with tab3:
-    st.header("柴犬")
-    st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
-
+    with tab3:
+        st.header("柴犬")
+        st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
+    
 
 
 
