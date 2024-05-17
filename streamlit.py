@@ -3,7 +3,7 @@ import random
 import pandas as pd
 import numpy as np
 from PIL import Image
-
+import matplotlib.pyplot as plt
 
 # Page title and initial text
 st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
@@ -195,18 +195,43 @@ st.scatter_chart(df,
     x='體重',y='身高',color='學生姓名')
 
 
-st.pyplot
-Streamlit Version
-v1.28.0
-Display a matplotlib.pyplot figure.
 
 
-import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
+#地圖的說明
 
-arr = np.random.normal(1, 1, size=100)
-fig, ax = plt.subplots()
-ax.hist(arr, bins=20)
+df = pd.DataFrame(
+    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+    columns=['lat', 'lon'])
 
-st.pyplot(fig)
+st.map(df)
+
+
+
+#定義台北市各區域的邊界座標
+taipei_boundaries = {
+    "區域": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
+    "西經度": [121.506623, 121.511034, 121.527879, 121.566173, 121.552743, 121.500144, 121.578663, 121.521708, 121.667708, 121.588943, 121.618678, 121.570432],
+    "東經度": [121.529235, 121.525196, 121.570859, 121.583734, 121.577419, 121.518360, 121.592992, 121.540610, 121.529424, 121.639907, 121.632538, 121.611367],
+    "南緯度": [25.032883, 25.062731, 25.069360, 25.048741, 25.026515, 25.035154, 25.031934, 25.089020, 25.110381, 25.073524, 25.044769, 24.989247],
+    "北緯度": [25.041144, 25.066231, 25.080802, 25.050934, 25.041457, 25.046256, 25.050930, 25.146468, 25.153252, 25.123361, 25.091840, 25.006014]
+}
+
+df_boundaries = pd.DataFrame(taipei_boundaries)
+
+#生成隨機數據，例如人口數
+df_boundaries['人口數'] = np.random.randint(100, 1000, len(df_boundaries))
+
+#創建一個包含隨機顏色的數據列
+df_boundaries['顏色'] = ['#{:02x}{:02x}{:02x}'.format(np.random.randint(0, 256), np.random.randint(0, 256), np.random.randint(0, 256)) for _ in range(len(df_boundaries))]
+
+#顯示地圖，將台北市各區域標記在地圖上，大小和顏色表示人口數
+st.map(df_boundaries,
+    latitude='南緯度',
+    longitude='西經度',
+    size='人口數',
+    color='顏色'
+)
+
+st.map(df_boundaries,
+    latitude='南緯度',
+    longitude='西經度', size=100, color='#0044ff')
