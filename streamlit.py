@@ -272,7 +272,7 @@ st.title('電影標題輸人應用')
 
 st.write('請在下方輸人電影標選，然後按下確認按鈕。')
 
-movie_title = st.text_input('輸入電影標題', '今夜作學也會笑')
+movie_title = st.text_input('輸入電影標題', '今夜作學也會笑',max_chars=15)
 
 if st.button('確認'):
 
