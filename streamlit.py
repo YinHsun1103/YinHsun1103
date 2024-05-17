@@ -3,6 +3,7 @@ import random
 import pandas as pd
 import numpy as np
 from PIL import Image
+import matplotlib.pyplot as plt
 
 # Page title and initial text
 st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
@@ -201,9 +202,7 @@ v1.28.0
 Display a matplotlib.pyplot figure.
 
 
-import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
+
 
 arr = np.random.normal(1, 1, size=100)
 fig, ax = plt.subplots()
