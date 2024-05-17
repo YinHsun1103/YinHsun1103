@@ -6,6 +6,23 @@ from PIL import Image
 
 
 
+# 创建选项卡
+tabs = ["页面1", "页面2", "页面3"]
+selected_tab = st.sidebar.radio("选择页面", tabs)
+
+# 页面内容
+if selected_tab == "页面1":
+    st.title("页面1")
+    st.write("这是页面1的内容。")
+
+elif selected_tab == "页面2":
+    st.title("页面2")
+    st.write("这是页面2的内容。")
+
+elif selected_tab == "页面3":
+    st.title("页面3")
+    st.write("这是页面3的内容。")
+
 
 
 # 设置应用标题
@@ -392,22 +409,7 @@ st.write('自動發信時間',t)
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
-#設定應用的標題和簡短描述
-st.title('聯繫方式選擇')
-st.markdown('目前示範將下拉選單放到側邊欄：')
 
-#創建下拉選單選項
-contact_option = st.sidebar.selectbox(
-    '選擇您希望的聯繫方式:',
-    ('電子郵件', '家用電話', '手機'))
-
-#顯示用戶選擇的聯繫方式
-st.write('您選擇了:', contact_option)
-
-genre = st.sidebar.radio(
-    "您最喜歡的電影類型是什麼",
-    [":rainbow[喜劇]", "***劇情***", "紀錄片 :movie_camera:"],
-    captions=["笑到不行。", "準備好爆米花。", "永不停止學習。"])
 
 
 col1, col2, col3 = st.columns(3)
