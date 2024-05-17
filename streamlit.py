@@ -23,7 +23,8 @@ if state.selected_tab == "页面1":
     K = 9999
     st.write(K)
 
-    dataframe = pd.DataFrame(np.random.randn(10, 20))
+    dataframe = pd.DataFrame(np.random.randn(10, 20), columns=[f"col_{i}" for i in range(20)])
+
     st.write(dataframe)
 
     st.markdown("# 這是一個示例 Streamlit 網頁")
