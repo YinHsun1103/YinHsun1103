@@ -7,19 +7,18 @@ import streamlit as st
 # 初始化状态信息
 state = st.session_state
 if "selected_tab" not in state:
-    state.selected_tab = "練習Strwamlit"
+    state.selected_tab = "页面1"
 
 # 创建选项卡
-tabs = ["練習Strwamlit", "HomeWork1"]
+tabs = ["页面1", "页面2"]
 if "selected_tab" not in state:
-    state.selected_tab = tabs[0]
-
+    state.selected_tab = st.sidebar.radio("选择页面", tabs)
+else:
+    state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
 
 # 页面内容
-if state.selected_tab == "練習Strwamlit":
-    st.title("練習Strwamlit")
-
-
+if state.selected_tab == "页面1":
+    st.title("页面1")
 
     # 在这里放置页面1的内容
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
@@ -344,9 +343,9 @@ if state.selected_tab == "練習Strwamlit":
 
 
 
-elif state.selected_tab == "HomeWork1":
-    st.title("HomeWork1")
-    # 在这里放置HomeWork1的内容
+elif state.selected_tab == "页面2":
+    st.title("页面2")
+    # 在这里放置页面2的内容
     # 设置应用标题
     st.title("上传CSV文件并绘制折线图")
 
