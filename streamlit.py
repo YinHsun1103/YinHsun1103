@@ -195,9 +195,3 @@ st.scatter_chart(df,
     x='體重',y='身高',color='學生姓名')
 
 
-
-
-st.pyplot
-Streamlit Version
-v1.28.0
-Display a matplotlib.pyplot figure.
