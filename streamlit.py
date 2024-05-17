@@ -261,7 +261,7 @@ my_large_df = pd.DataFrame(data)
 #下載按鈕download button
 @st.cache_data
 def convert_df(df):
-    IMPORTANT: Cache the conversion to prevent computation on every rerun
+    #IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv(index=False).encode('utf-8')
 
 csv = convert_df(my_large_df)
