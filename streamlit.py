@@ -336,3 +336,7 @@ d = st.date_input(
     format="YYYY-MM-DD"
 )
 d
+
+
+t=st.time_input('設定自動發信的時間',value=None,step=3600)
+st.write('自動發信時間',t)
