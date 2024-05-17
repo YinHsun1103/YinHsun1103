@@ -10,15 +10,16 @@ if "selected_tab" not in state:
     state.selected_tab = "页面1"
 
 # 创建选项卡
-tabs = ["页面1", "页面2"]
+tabs = ["Steamlit练习", "页面2"]
 if "selected_tab" not in state:
     state.selected_tab = st.sidebar.radio("选择页面", tabs)
 else:
     state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
 
 # 页面内容
-if state.selected_tab == "页面1":
-    st.title("页面1")
+if state.selected_tab == "Steamlit练习":
+    st.title("Steamlit练习")
+
 
     # 在这里放置页面1的内容
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
