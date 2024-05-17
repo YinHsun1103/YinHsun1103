@@ -268,20 +268,17 @@ with open("S__24829963.jpg", "rb") as file:
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
-import streamlit as st
-
-# Movie title input section
 st.title('電影標題輸入應用')
 st.write('請在下方輸入電影標題，然後按下確認按鈕。')
 movie_title = st.text_input('輸入電影標題', '今夜作學也會笑', max_chars=15)
-if st.button('確認'):
+if st.button('確認電影標題'):
     st.write('您選擇的電影標題是：', movie_title)
 
 # Password input section
 st.title('密碼輸入應用')
 st.write('請在下方輸入您的密碼，然後按下確認按鈕。')
 password = st.text_input('輸入密碼', type='password')
-if st.button('確認'):
+if st.button('確認密碼'):
     # 檢查密碼是否正確
     if password == '98888888':  # 將'98888888'替換為您的實際密碼
         st.write('密碼正確！歡迎您進入系統。')
