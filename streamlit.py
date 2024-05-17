@@ -290,19 +290,18 @@ if state.selected_tab == "页面1":
     jan_1 = datetime.date(next_year, 1, 1)
     dec_31 = datetime.date(next_year, 12, 31)
 
-d = st.date_input(
-    "選擇明年要休假的期間",
-    (jan_1, datetime.date(next_year, 1, 7)),
-    min_value=jan_1,
-    max_value=dec_31,
-    format="YYYY-MM-DD"
-)
-d
+    d = st.date_input(
+        "選擇明年要休假的期間",
+        (jan_1, datetime.date(next_year, 1, 7)),
+        min_value=jan_1,
+        max_value=dec_31,
+        format="YYYY-MM-DD"
+    )
+    d
 
 
-t=st.time_input('設定自動發信的時間',value=None,step=3600)
-st.write('自動發信時間',t)
-
+    t=st.time_input('設定自動發信的時間',value=None,step=3600)
+    st.write('自動發信時間',t)
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
