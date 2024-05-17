@@ -246,7 +246,7 @@ if (st.button(":dart:這是第二個按鈕")):
 
 #link button，連結按鈕
 st.link_button("前往奇摩首頁", "https://tw.yahoo.com",type="primary",help="hello my friend")
-st.link_button("前往台中科大首頁", "https://www.nutc.edu.tw/")
+st.link_button("前往台中科大首頁", "https://www.nutc.edu.tw/",disabled=True)
 
 
 #下載按鈕download button
