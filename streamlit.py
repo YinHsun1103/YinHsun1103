@@ -339,6 +339,19 @@ if state.selected_tab == "页面1":
         st.header("柴犬")
         st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
         
+
+
+
+
+
+
+
+
+
+
+
+
+
 elif state.selected_tab == "页面2":
     st.title("页面2")
     # 设置应用标题
@@ -362,21 +375,30 @@ elif state.selected_tab == "页面2":
         selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
         # 繪製折線圖
+        st.subheader("折線圖")
+        st.write("以下是", selected_column, "的折線圖：")
         st.line_chart(df[selected_column])
 
         # 面積圖
         chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+        st.subheader("面積圖")
+        st.write("以下是隨機數據的面積圖：")
         st.area_chart(chart_data)
         
         # 長條圖
+        st.subheader("長條圖")
+        st.write("以下是隨機數據的長條圖：")
         st.bar_chart(chart_data)
 
         # 折線圖
+        st.subheader("折線圖")
+        st.write("以下是隨機數據的折線圖：")
         st.line_chart(chart_data)
 
         # 散點圖
+        st.subheader("散點圖")
+        st.write("以下是隨機數據的散點圖：")
         st.scatter_chart(chart_data)
-
 
 
 
