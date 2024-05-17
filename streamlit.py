@@ -340,3 +340,29 @@ d
 
 t=st.time_input('設定自動發信的時間',value=None,step=3600)
 st.write('自動發信時間',t)
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+#設定應用的標題和簡短描述
+st.title('聯繫方式選擇')
+st.markdown('目前示範將下拉選單放到側邊欄：')
+
+#創建下拉選單選項
+contact_option = st.sidebar.selectbox(
+    '選擇您希望的聯繫方式:',
+    ('電子郵件', '家用電話', '手機'))
+
+#顯示用戶選擇的聯繫方式
+st.write('您選擇了:', contact_option)
+
+genre = st.sidebar.radio(
+    "您最喜歡的電影類型是什麼",
+    [":rainbow[喜劇]", "***劇情***", "紀錄片 :movie_camera:"],
+    captions=["笑到不行。", "準備好爆米花。", "永不停止學習。"])
+
+
+st.sidebar.link_button("前往奇摩首頁", "https://tw.yahoo.com",type="primary",help="hello my friend") 
+st.sidebar.link_button("前往龍龍的教學頻道", "   / @changlunglung  ",disabled=True)
+
+
+
