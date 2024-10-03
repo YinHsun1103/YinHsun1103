@@ -251,15 +251,5 @@ elif state.selected_tab == "HomeWork1":
         st.write("以下是", selected_column, "的散點圖：")
         st.scatter_chart(df[selected_column])
 
-<!--
-Paste this script at the bottom of your HTML before the </body> tag.
-See more style and config options on our docs
-https://github.com/Mintplex-Labs/anything-llm/tree/master/embed/README.md
--->
-<script
-  data-embed-id="ee2070c5-1540-4edb-95ac-3b9b10b298f3"
-  data-base-api-url="https://xsb2peter.biobank.org.tw:3001/api/embed"
-  src="https://xsb2peter.biobank.org.tw:3001/embed/anythingllm-chat-widget.min.js">
-</script>
 
 
