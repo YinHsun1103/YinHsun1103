@@ -298,7 +298,7 @@ with st.expander("ℹ️ Disclaimer"):
         """
     )
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+client = OpenAI(api_key=st.secrets["sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3"])
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
