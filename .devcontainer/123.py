@@ -290,6 +290,7 @@ if prompt := st.chat_input("What is up?"):
 import streamlit as st
 from openai import OpenAI
 
+import openai 
 st.title("ChatGPT-like clone")
 with st.expander("ℹ️ Disclaimer"):
     st.caption(
