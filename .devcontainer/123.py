@@ -284,3 +284,54 @@ if prompt := st.chat_input("What is up?"):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import streamlit as st
+import openai
+
+api_key = st.secrets["openai_api_key"]
+openai.api_key = api_key
+
+user_input = st.text_input("請輸入訊息")
+if st.button("送出"):
+    # 將使用者的訊息傳送給聊天機器人
+    pass
+
+# 將使用者的訊息傳送給聊天機器人並獲得回覆
+response = openai.Completion.create(
+    engine="davinci",
+    prompt=user_input,
+    max_tokens=50
+)
+
+# 顯示聊天機器人的回覆
+st.write("聊天機器人：", response.choices[0].text)
+
+# 追蹤對話紀錄
+if "messages" not in st.session_state:
+    st.session_state["messages"] = []
+
+# 新增使用者的訊息到對話紀錄
+st.session_state["messages"].append({
+    "role": "user",
+    "content": user_input
+})
+
+# 顯示對話紀錄
+for message in st.session_state["messages"]:
+    st.chat_message(message)
