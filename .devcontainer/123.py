@@ -255,34 +255,29 @@ elif state.selected_tab == "HomeWork1":
 
 #sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3
 
-
 import streamlit as st
-import openai
-import os  # Importing os to access environment variables
-!pip install openai
 
-st.set_page_config(page_title="Chat GPT-40", page_icon=":robot:", layout="centered")
+st.title("Echo Bot")
 
-if 'chats' not in st.session_state:
-    st.session_state['chats'] = []
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-user_input = st.text_input("問我什麼...", key="input")
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-if st.button("提交"):
-    if user_input:  # Check if input is not empty
-        st.session_state['chats'].append({"role": "user", "content": user_input})
-        openai.api_key = os.getenv('sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3')
+# React to user input
+if prompt := st.chat_input("What is up?"):
+    # Display user message in chat message container
+    st.chat_message("user").markdown(prompt)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
 
-        response = openai.Completion.create(
-            model="gpt-4-0314",
-            messages=[
-                {"role": "system", "content": "你是世界上最好的社交媒體營銷專家。"},
-                {"role": "user", "content": user_input}
-            ]
-        )
-
-        assistant_reply = response.choices[0].message['content']
-        st.session_state['chats'].append({"role": "assistant", "content": assistant_reply})
-
-for chat in st.session_state['chats']:
-    st.text_area("", value=f"{chat['role']}: {chat['content']}", height=80, key=f"{chat['role']}_{len(st.session_state['chats'])}")
+    response = f"Echo: {prompt}"
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(response)
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
