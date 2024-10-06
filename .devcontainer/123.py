@@ -259,6 +259,7 @@ elif state.selected_tab == "HomeWork1":
 import streamlit as st
 import openai
 import os  # Importing os to access environment variables
+!pip install openai
 
 st.set_page_config(page_title="Chat GPT-40", page_icon=":robot:", layout="centered")
 
