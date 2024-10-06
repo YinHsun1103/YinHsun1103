@@ -251,25 +251,37 @@ elif state.selected_tab == "HomeWork1":
         st.write("以下是", selected_column, "的散點圖：")
         st.scatter_chart(df[selected_column])
 
+
+
+#sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3
+
+
 import streamlit as st
 import openai
+import os  # Importing os to access environment variables
+
 st.set_page_config(page_title="Chat GPT-40", page_icon=":robot:", layout="centered")
+
 if 'chats' not in st.session_state:
     st.session_state['chats'] = []
-    user_input = st.text_input ("問我什麼...", key="input")
-if st.button ("提交"):
-    st.session_state ['chats'].append ({"role": "user", "content": user_input})
-    user_input = ""  # Clear the input field
-openai.api_key = os.getenv('OPENAI_API_KEY')
-response = openai.Completion.create (
-    model="gpt-4-0314",
-    messages=[
-        {"role": "system", "content": "你是世界上最好的社交媒體營銷專家。"},
-        {"role": "user", "content": user_input}
-    ]
-)
-assistant_reply = response.choices[0].message['content']
-st.session_state['chats'].append({"role": "assistant", "content": assistant_reply})
+
+user_input = st.text_input("問我什麼...", key="input")
+
+if st.button("提交"):
+    if user_input:  # Check if input is not empty
+        st.session_state['chats'].append({"role": "user", "content": user_input})
+        openai.api_key = os.getenv('sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3')
+
+        response = openai.Completion.create(
+            model="gpt-4-0314",
+            messages=[
+                {"role": "system", "content": "你是世界上最好的社交媒體營銷專家。"},
+                {"role": "user", "content": user_input}
+            ]
+        )
+
+        assistant_reply = response.choices[0].message['content']
+        st.session_state['chats'].append({"role": "assistant", "content": assistant_reply})
+
 for chat in st.session_state['chats']:
-    st.text_area("", value=f"{chat['role']}: {chat['content']}", height=80, key=chat['role'])
-    
+    st.text_area("", value=f"{chat['role']}: {chat['content']}", height=80, key=f"{chat['role']}_{len(st.session_state['chats'])}")
