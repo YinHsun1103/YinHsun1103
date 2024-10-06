@@ -285,10 +285,9 @@ if prompt := st.chat_input("What is up?"):
 
 
 
-
-
 import streamlit as st
-import openai 
+import openai  # 正確地導入 openai 套件
+
 st.title("ChatGPT-like clone")
 with st.expander("ℹ️ Disclaimer"):
     st.caption(
@@ -298,7 +297,7 @@ with st.expander("ℹ️ Disclaimer"):
         """
     )
 
-client = OpenAI(api_key=st.secrets["sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3"])
+client = openai  # 使用 openai 模組，而不是 OpenAI
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
@@ -330,7 +329,7 @@ else:
 
         with st.chat_message("assistant"):
             try:
-                stream = client.chat.completions.create(
+                stream = client.Completion.create(
                     model=st.session_state["openai_model"],
                     messages=[
                         {"role": m["role"], "content": m["content"]}
