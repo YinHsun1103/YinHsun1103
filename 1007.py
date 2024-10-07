@@ -33,8 +33,8 @@ if "selected_tab" not in state:
     state.selected_tab = "Steamlit练习"
 
 # 创建选项卡
-tabs = ["Steamlit练习", "HomeWork1"]
-state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
+tabs = ["Steamlit練習", "HomeWork1"]
+state.selected_tab = st.sidebar.radio("選擇頁面", tabs, index=tabs.index(state.selected_tab))
 
 # 页面内容
 if state.selected_tab == "Steamlit练习":
