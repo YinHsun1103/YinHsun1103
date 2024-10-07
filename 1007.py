@@ -363,15 +363,22 @@ elif st.session_state.selected_tab == "HomeWork1":
         st.write(df)
 
         selected_column = st.selectbox("選擇要繪製的列", df.columns)
-
+        # 绘制折线图
         st.subheader("折線圖")
+        st.write("以下是", selected_column, "的折線圖：")
         st.line_chart(df[selected_column])
 
+        # 绘制面积图
         st.subheader("面積圖")
+        st.write("以下是", selected_column, "的面積圖：")
         st.area_chart(df[selected_column])
-
+        
+        # 绘制条形图
         st.subheader("長條圖")
+        st.write("以下是", selected_column, "的長條圖：")
         st.bar_chart(df[selected_column])
 
+        # 绘制散点图
         st.subheader("散點圖")
-        st.write("此圖僅適用於數值數據列")
+        st.write("以下是", selected_column, "的散點圖：")
+        st.scatter_chart(df[selected_column])
