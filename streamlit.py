@@ -4,14 +4,13 @@ import pandas as pd  # 匯入 Pandas 庫，用於資料處理與分析
 import numpy as np  # 匯入 NumPy 庫，用於數值計算
 from PIL import Image  # 從 PIL 庫匯入 Image 模組，用於處理圖像
 import datetime  # 匯入 datetime 庫，用於時間和日期的操作
-
-import openai
-import os
+import openai  # 匯入 OpenAI 庫，用於與 OpenAI 的 API 進行互動，例如 GPT 模型的使用
+import os      # 匯入 os 庫，用於操作系統層級的功能，例如環境變數管理、文件路徑操作等
 
 # 設置頁面配置
 st.set_page_config(page_title="ChatGPT-like clone")
 
-
+#-----------------------------------------------------------------------------------------------------------------------------------------
 
 # 定義頁籤選項
 # 此處建立了一個包含三個頁籤名稱的清單，每個頁籤代表不同的網頁內容
@@ -400,50 +399,49 @@ elif st.session_state.selected_tab == "HomeWork1":
             st.scatter_chart(df[selected_column])
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork2":
-    st.title("HomeWork2  之  連接Chat GPT")  # 顯示標題
-
+    st.title("HomeWork2 之 連接Chat GPT")  # 顯示標題
 
     # 設置 API 金鑰
-    api_key = st.secrets["OPENAI_API_KEY"]
-    openai.api_key = api_key
+    api_key = st.secrets["OPENAI_API_KEY"]  # 從 Streamlit 秘密配置中取得 OpenAI API 金鑰
+    openai.api_key = api_key  # 設定 OpenAI 的 API 金鑰，使應用可以呼叫 OpenAI API
 
     # 初始化應用狀態
     if "openai_model" not in st.session_state:
-        st.session_state["openai_model"] = "gpt-3.5-turbo"  # 使用聊天模型
+        st.session_state["openai_model"] = "gpt-3.5-turbo"  # 設定預設使用的聊天模型（例如 gpt-3.5-turbo）
 
     if "messages" not in st.session_state:
-        st.session_state.messages = []
+        st.session_state.messages = []  # 初始化訊息列表，存放聊天記錄
 
     # 顯示整個聊天紀錄
     for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+        with st.chat_message(message["role"]):  # 根據訊息的角色顯示（使用者或助手）
+            st.markdown(message["content"])  # 以 markdown 格式顯示訊息內容
 
     # 聊天輸入框
-    if prompt := st.chat_input("What is up?"):
+    if prompt := st.chat_input("What is up?"):  # 聊天輸入框，用戶可輸入訊息
         # 添加用戶輸入的訊息到訊息列表
         st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+        with st.chat_message("user"):  # 顯示用戶的訊息
+            st.markdown(prompt)  # 以 markdown 格式顯示用戶的訊息
 
         # 呼叫 OpenAI API 以獲取助手回應
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant"):  # 顯示助手回應的訊息框
             try:
                 response = openai.ChatCompletion.create(
-                    model=st.session_state["openai_model"],
-                    messages=st.session_state.messages
+                    model=st.session_state["openai_model"],  # 使用已設置的聊天模型
+                    messages=st.session_state.messages  # 將整個訊息記錄發送至 OpenAI API
                 )
-                assistant_reply = response['choices'][0]['message']['content']
+                assistant_reply = response['choices'][0]['message']['content']  # 取得助手的回應內容
                 # 添加助手的回應到訊息列表
                 st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
-                st.markdown(assistant_reply)
+                st.markdown(assistant_reply)  # 以 markdown 格式顯示助手的回應
 
             except Exception as e:
-                st.error(f"An error occurred: {e}")
+                st.error(f"An error occurred: {e}")  # 若發生錯誤，顯示錯誤訊息
 
     # 聊天記錄上限提示
-    if len(st.session_state.messages) >= 20:  # 假設設定了 20 條訊息為上限
+    if len(st.session_state.messages) >= 20:  # 設定訊息數量上限（此處為 20）
         st.info(
             """Notice: The maximum message limit for this demo version has been reached. 
             We encourage you to build your own application using Streamlit's tutorial."""
-        )
+        )  # 當訊息達到上限時，顯示提示訊息
