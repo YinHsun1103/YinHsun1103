@@ -3,7 +3,7 @@ import random
 import pandas as pd
 import numpy as np
 from PIL import Image
-OPENAI_API_KEY="sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3"
+
 
 
 # 初始化状态信息
@@ -269,7 +269,7 @@ elif state.selected_tab == "HomeWork1":
 import streamlit as st
 import openai
 
-api_key = st.secrets["sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3"]
+api_key = st.secrets["OPENAI_API_KEY"]
 openai.api_key = api_key
 
 user_input = st.text_input("請輸入訊息")
