@@ -1,4 +1,21 @@
+
 import streamlit as st
+
+# 將 set_page_config 放在第一個 Streamlit 指令位置
+st.set_page_config(page_title="ChatGPT-like clone")
+
+import openai
+import os
+
+client = openai
+api_key = st.secrets["OPENAI_API_KEY"]
+
+
+
+
+
+
+
 import random
 import pandas as pd
 import numpy as np
@@ -260,12 +277,16 @@ elif state.selected_tab == "HomeWork1":
 
 
 
-import streamlit as st
-import openai
-import os
 
-# **將這行移到最上方，確保它是第一個 Streamlit 指令**
-st.set_page_config(page_title="ChatGPT-like clone")
+
+
+
+
+
+
+
+
+
 
 client = openai
 api_key = st.secrets["OPENAI_API_KEY"]
