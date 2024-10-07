@@ -260,12 +260,11 @@ elif state.selected_tab == "HomeWork1":
 
 
 
-
-
 import streamlit as st
 import openai
 import os
 
+# **將這行移到最上方，確保它是第一個 Streamlit 指令**
 st.set_page_config(page_title="ChatGPT-like clone")
 
 client = openai
@@ -298,3 +297,4 @@ if prompt := st.chat_input("What is up?"):
 
         except Exception as e:
             st.error("An error occurred. Please try again later.")
+
