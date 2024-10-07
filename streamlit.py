@@ -413,22 +413,28 @@ elif st.session_state.selected_tab == "HomeWork2":
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    
+
+    # 顯示整個聊天紀錄
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
     # 聊天輸入框
     if prompt := st.chat_input("What is up?"):
+        # 添加用戶輸入的訊息到訊息列表
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
+        # 呼叫 OpenAI API 以獲取助手回應
         with st.chat_message("assistant"):
             try:
-                # 使用 ChatCompletion API 呼叫聊天模型
                 response = openai.ChatCompletion.create(
                     model=st.session_state["openai_model"],
                     messages=st.session_state.messages
                 )
-                # 提取助手回應
                 assistant_reply = response['choices'][0]['message']['content']
+                # 添加助手的回應到訊息列表
                 st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
                 st.markdown(assistant_reply)
 
@@ -440,15 +446,4 @@ elif st.session_state.selected_tab == "HomeWork2":
         st.info(
             """Notice: The maximum message limit for this demo version has been reached. 
             We encourage you to build your own application using Streamlit's tutorial."""
-         )
-
-
-
-
-
-
-
-
-
-
-
+        )
