@@ -3,7 +3,7 @@ import random
 import pandas as pd
 import numpy as np
 from PIL import Image
-OPENAI_API_KEY = "sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3"
+OPENAI_API_KEY="sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3"
 
 
 # 初始化状态信息
@@ -256,8 +256,6 @@ elif state.selected_tab == "HomeWork1":
 
 
 #sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3
-
-
 
 
 
