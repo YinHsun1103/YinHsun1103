@@ -20,11 +20,12 @@ if prompt := st.chat_input("What is up?"):
 
     with st.chat_message("assistant"):
         try:
-            response = openai.ChatCompletion.create(
+            response = openai.Completion.create(
                 model=st.session_state["openai_model"],
-                messages=st.session_state.messages
+                prompt=prompt,
+                max_tokens=100
             )
-            assistant_reply = response['choices'][0]['message']['content']
+            assistant_reply = response['choices'][0]['text']
             st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
             st.markdown(assistant_reply)
 
