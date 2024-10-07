@@ -8,6 +8,11 @@ import datetime  # 匯入 datetime 庫，用於時間和日期的操作
 import openai
 import os
 
+# 設置頁面配置
+ st.set_page_config(page_title="ChatGPT-like clone")
+
+
+
 # 定義頁籤選項
 # 此處建立了一個包含三個頁籤名稱的清單，每個頁籤代表不同的網頁內容
 tabs = ["Steamlit練習", "HomeWork1", "HomeWork2"]
@@ -397,13 +402,6 @@ elif st.session_state.selected_tab == "HomeWork1":
 elif st.session_state.selected_tab == "HomeWork2":
     st.title("HomeWork2  之  連接Chat GPT")  # 顯示標題
 
-
-
-
-
-
-    # 設置頁面配置
-    st.set_page_config(page_title="ChatGPT-like clone")
 
     # 設置 API 金鑰
     api_key = st.secrets["OPENAI_API_KEY"]
