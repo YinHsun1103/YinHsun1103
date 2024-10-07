@@ -12,15 +12,16 @@ tabs = ["Steamlit练习", "HomeWork1"]
 if "selected_tab" not in st.session_state:
     st.session_state.selected_tab = tabs[0]
 
-# Sidebar tab selection and immediate session state update
-selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
-if selected_tab != st.session_state.selected_tab:
-    st.session_state.selected_tab = selected_tab
-    st.experimental_rerun()  # Rerun the app immediately to reflect the new tab selection
+# Use sidebar radio for tab selection
+selected_tab = st.sidebar.radio("选择页面", tabs)
+
+# Update session state directly
+st.session_state.selected_tab = selected_tab
 
 # Page content based on the selected tab
 if st.session_state.selected_tab == "Steamlit练习":
     st.title("Steamlit练习")
+
 
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
     st.write('我是一個字串')
