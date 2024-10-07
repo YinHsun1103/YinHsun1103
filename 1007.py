@@ -12,8 +12,7 @@ if "selected_tab" not in st.session_state:
 # 创建选项卡
 tabs = ["Steamlit练习", "HomeWork1"]
 if "selected_tab" not in state:
-    state.selected_tab = st.sidebar.radio("选择页面", tabs)
-else:
+
     state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
 
 # Save the selected tab to session state
