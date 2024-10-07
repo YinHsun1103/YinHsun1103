@@ -8,31 +8,25 @@ import os
 client = openai
 api_key = st.secrets["OPENAI_API_KEY"]
 
-
-
-
-
 import random
 import pandas as pd
 import numpy as np
 from PIL import Image
 
-
-
-# 初始化状态信息
+# 初始化狀態信息
 state = st.session_state
 if "selected_tab" not in state:
-    state.selected_tab = "Steamlit练习"
+    state.selected_tab = "Steamlit練習"
 
-# 创建选项卡
+# 建立選項卡
 tabs = ["Steamlit練習", "HomeWork1"]
 state.selected_tab = st.sidebar.radio("選擇頁面", tabs, index=tabs.index(state.selected_tab))
 
-# 页面内容
-if state.selected_tab == "Steamlit练习":
-    st.title("Steamlit练习")
+# 頁面內容
+if state.selected_tab == "Steamlit練習":
+    st.title("Steamlit練習")
 
-    # 在这里放置页面1的内容
+    # 此處放置頁面1的內容
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
     st.write('我是一個字串')
     K = 9999
@@ -106,7 +100,7 @@ if state.selected_tab == "Steamlit练习":
     )
     use_container_width=True
 
-    # Metrics
+    # 顯示指標
     st.metric(label="溫度", value="30 °C", delta="1.2 °C")
 
     col1, col2, col3 = st.columns(3)
@@ -118,7 +112,7 @@ if state.selected_tab == "Steamlit练习":
     st.metric(label="聯發科", value=1100, delta=80, delta_color="inverse")
     st.metric(label="台積電", value=512, delta=0, delta_color="off")
 
-    # JSON display
+    # 顯示 JSON 格式的資料
     data = {
         '姓名': '王小明',
         '年齡': 30,
@@ -135,7 +129,7 @@ if state.selected_tab == "Steamlit练习":
     }
     st.json(data)
 
-    # Displaying an image
+    # 顯示圖片
     image = Image.open('S__24829963.jpg')
     st.image(image, caption='這是一隻阿拉斯加的照片')
 
@@ -152,17 +146,17 @@ if state.selected_tab == "Steamlit练习":
     # 散點圖
     st.scatter_chart(chart_data)
 
-    # 加上size大小變化
+    # 加上尺寸大小變化的散點圖
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["col1", "col2", "col3"])
     chart_data['col4'] = np.random.choice(['A', 'B', 'C'], 20)
     st.scatter_chart(chart_data, x='col1', y='col2', color='col4', size='col3')
 
-    # 地圖的說明 (移除不支援的 size 和 color)
+    # 地圖顯示
     df = pd.DataFrame(np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4], columns=['lat', 'lon'])
     st.map(df)
 
     # 按鈕
-    st.button("重設",type="primary")
+    st.button("重設", type="primary")
     if (st.button(":100:我是一個按鈕")):
         st.write("現在按下的是「我是一個按鈕」！！！")
     if (st.button("這是第二個按鈕")):
@@ -170,11 +164,11 @@ if state.selected_tab == "Steamlit练习":
     if (st.button(":dart:這是第二個按鈕")):
         st.write("現在按下的是，帶有圖示的「第二個按鈕」！！！")
 
-    # link button，連結按鈕
-    st.link_button("前往奇摩首頁", "https://tw.yahoo.com",type="primary",help="hello my friend")
-    st.link_button("前往台中科大首頁", "https://www.nutc.edu.tw/",disabled=True)
+    # 連結按鈕
+    st.link_button("前往奇摩首頁", "https://tw.yahoo.com", type="primary", help="hello my friend")
+    st.link_button("前往台中科大首頁", "https://www.nutc.edu.tw/", disabled=True)
 
-    # 下載按鈕download button
+    # 下載按鈕
     data = {
         'Column1': [1, 2, 3, 4, 5],
         'Column2': ['A', 'B', 'C', 'D', 'E']
@@ -188,15 +182,15 @@ if state.selected_tab == "Steamlit练习":
     csv = convert_df(my_large_df)
 
     st.download_button(
-        label="dataframe下載成csv",
+        label="下載資料框成 CSV",
         data=csv,
         file_name='large_df.csv',
         mime='text/csv'
     )
 
-    # 單純的將文字下載，並存成txt檔
+    # 文字下載成 TXT
     text_contents = '''這就是單純的將文字下載，並存成txt檔'''
-    st.download_button('將文字下載', text_contents)
+    st.download_button('下載文字', text_contents)
 
     # 下載圖片
     with open("S__24829963.jpg", "rb") as file:
@@ -233,7 +227,7 @@ if state.selected_tab == "Steamlit练习":
         st.header("柴犬")
         st.image("S__24829963.jpg")
 
-# HomeWork1 页面
+# HomeWork1 頁面
 elif state.selected_tab == "HomeWork1":
     st.title("HomeWork1")
     st.write("請上傳您的CSV文件.")
@@ -246,30 +240,22 @@ elif state.selected_tab == "HomeWork1":
 
         selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
-        # 绘制折线图
+        # 繪製折線圖
         st.subheader("折線圖")
         st.write("以下是", selected_column, "的折線圖：")
         st.line_chart(df[selected_column])
 
-        # 绘制面积图
+        # 繪製面積圖
         st.subheader("面積圖")
         st.write("以下是", selected_column, "的面積圖：")
         st.area_chart(df[selected_column])
         
-        # 绘制条形图
+        # 繪製長條圖
         st.subheader("長條圖")
         st.write("以下是", selected_column, "的長條圖：")
         st.bar_chart(df[selected_column])
 
-        # 绘制散点图
+        # 繪製散點圖
         st.subheader("散點圖")
         st.write("以下是", selected_column, "的散點圖：")
         st.scatter_chart(df[selected_column])
-
-
-
-#sk-proj-4m0hfrpPylVoi429S9JQT3BlbkFJe9aHwIDJzWsp62yz9mz3
-
-
-
-
