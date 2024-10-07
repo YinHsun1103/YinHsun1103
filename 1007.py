@@ -1,6 +1,5 @@
 import streamlit as st
-
-# 將 set_page_config 放在第一個 Streamlit 指令位置
+# 設置頁面配置 - 這行必須是程式碼中的第一個 Streamlit 指令
 st.set_page_config(page_title="ChatGPT-like clone")
 
 import openai
