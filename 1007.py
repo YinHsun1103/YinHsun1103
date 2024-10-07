@@ -5,22 +5,19 @@ import numpy as np
 from PIL import Image
 import datetime
 
-# Initialize session state
+# Initialize session state if necessary
 if "selected_tab" not in st.session_state:
     st.session_state.selected_tab = "Steamlit练习"
 
-# Create tabs with a radio button
+# Create the tabs in the sidebar
 tabs = ["Steamlit练习", "HomeWork1"]
-st.session_state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
+selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
 
+# Save the selected tab to session state
+st.session_state.selected_tab = selected_tab
 
-
-# 创建选项卡
-tabs = ["Steamlit练习", "HomeWork1"]
-state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
-
-# 页面内容
-if state.selected_tab == "Steamlit练习":
+# Page content based on the selected tab
+if st.session_state.selected_tab == "Steamlit练习":
     st.title("Steamlit练习")
 
     st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
@@ -122,7 +119,7 @@ if state.selected_tab == "Steamlit练习":
     t = st.time_input('設定自動發信的時間', step=3600)
     st.write('自動發信時間', t)
 
-elif state.selected_tab == "HomeWork1":
+elif st.session_state.selected_tab == "HomeWork1":
     st.title("HomeWork1")
     st.write("請上傳您的CSV文件.")
 
