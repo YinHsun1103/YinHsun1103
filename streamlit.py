@@ -5,6 +5,8 @@ import numpy as np  # 匯入 NumPy 庫，用於數值計算
 from PIL import Image  # 從 PIL 庫匯入 Image 模組，用於處理圖像
 import datetime  # 匯入 datetime 庫，用於時間和日期的操作
 
+import openai
+
 # 定義頁籤選項
 # 此處建立了一個包含三個頁籤名稱的清單，每個頁籤代表不同的網頁內容
 tabs = ["Steamlit練習", "HomeWork1", "HomeWork2"]
@@ -356,7 +358,7 @@ if st.session_state.selected_tab == "Steamlit練習":
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork1分頁
 elif st.session_state.selected_tab == "HomeWork1":
-        st.title("HomeWork1之可上傳CSV檔")  # 設定標題
+        st.title("HomeWork1  之  可上傳CSV檔")  # 設定標題
         st.write("請上傳您的CSV文件.")  # 顯示提示文字
 
         # 文件上傳功能，限制文件格式為 CSV
@@ -392,5 +394,36 @@ elif st.session_state.selected_tab == "HomeWork1":
             st.scatter_chart(df[selected_column])
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork2":
-    st.title("HomeWork2之連接Chat GPT")  # 顯示標題
+    st.title("HomeWork2  之  連接Chat GPT")  # 顯示標題
 
+    api_key = st.secrets["openai_api_key"]
+    openai.api_key = api_key
+
+    user_input = st.text_input("請輸入訊息")
+    if st.button("送出"):
+    # 將使用者的訊息傳送給聊天機器人
+        pass
+
+    # 將使用者的訊息傳送給聊天機器人並獲得回覆
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt=user_input,
+        max_tokens=50
+    )
+
+    # 顯示聊天機器人的回覆
+    st.write("聊天機器人：", response.choices[0].text)
+    追蹤對話紀錄：
+    # 追蹤對話紀錄
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = []
+    
+    # 新增使用者的訊息到對話紀錄
+    st.session_state["messages"].append({
+        "role": "user",
+        "content": user_input
+    })
+
+    # 顯示對話紀錄
+    for message in st.session_state["messages"]:
+        st.chat_message(message)
