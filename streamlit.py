@@ -9,7 +9,7 @@ import openai
 import os
 
 # 設置頁面配置
- st.set_page_config(page_title="ChatGPT-like clone")
+st.set_page_config(page_title="ChatGPT-like clone")
 
 
 
