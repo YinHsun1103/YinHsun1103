@@ -413,7 +413,7 @@ elif st.session_state.selected_tab == "HomeWork2":
 
     # 顯示聊天機器人的回覆
     st.write("聊天機器人：", response.choices[0].text)
-    追蹤對話紀錄：
+
     # 追蹤對話紀錄
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
