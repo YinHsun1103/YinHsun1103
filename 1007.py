@@ -5,10 +5,15 @@ import numpy as np
 from PIL import Image
 import datetime
 
-# 初始化状态信息
-state = st.session_state
-if "selected_tab" not in state:
-    state.selected_tab = "Steamlit练习"
+# Initialize session state
+if "selected_tab" not in st.session_state:
+    st.session_state.selected_tab = "Steamlit练习"
+
+# Create tabs with a radio button
+tabs = ["Steamlit练习", "HomeWork1"]
+st.session_state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
+
+
 
 # 创建选项卡
 tabs = ["Steamlit练习", "HomeWork1"]
