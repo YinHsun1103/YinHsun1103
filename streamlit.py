@@ -317,65 +317,76 @@ if st.session_state.selected_tab == "Steamlit練習":
     t = st.time_input('設定自動發信的時間', value=None, step=3600)
     st.write('自動發信時間', t)
 #-----------------------------------------------------------------------------------------------------------------------------------------
-
-
-
+    # 建立三欄佈局
     col1, col2, col3 = st.columns(3)
 
+    # 顯示阿拉斯加圖片於第一欄
     with col1:
-       st.header("阿拉斯加")
-       st.image("S__24829963.jpg")
+       st.header("阿拉斯加")  # 設定標題
+       st.image("S__24829963.jpg")  # 顯示阿拉斯加的圖片
 
+    # 顯示邊境牧羊犬圖片於第二欄
     with col2:
-       st.header("邊境牧羊犬")
-       st.image("images.jpg")
+       st.header("邊境牧羊犬")  # 設定標題
+       st.image("images.jpg")  # 顯示邊境牧羊犬的圖片
 
+    # 顯示柴犬圖片於第三欄
     with col3:
-       st.header("柴犬")
-       st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
+       st.header("柴犬")  # 設定標題
+       st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")  # 顯示柴犬的圖片
 
-
+    # 建立三個分頁標籤
     tab1, tab2, tab3 = st.tabs(["阿拉斯加", "邊境牧羊犬", "柴犬"])
+
+    # 在第一個分頁中顯示阿拉斯加圖片
     with tab1:
-        st.header("阿拉斯加")
-        st.image("S__24829963.jpg")
+        st.header("阿拉斯加")  # 設定標題
+        st.image("S__24829963.jpg")  # 顯示阿拉斯加的圖片
 
+    # 在第二個分頁中顯示邊境牧羊犬圖片
     with tab2:
-        st.header("邊境牧羊犬")
-        st.image("images.jpg")
+        st.header("邊境牧羊犬")  # 設定標題
+        st.image("images.jpg")  # 顯示邊境牧羊犬的圖片
 
+    # 在第三個分頁中顯示柴犬圖片
     with tab3:
-        st.header("柴犬")
-        st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")
-#---------------------------------------------------------------------------------------------------------------
+        st.header("柴犬")  # 設定標題
+        st.image("1a0ec01465964e9fa986689864e47f3d_th.jpg.crdownload")  # 顯示柴犬的圖片
 
-elif st.session_state.selected_tab == "HomeWork1":
-    st.title("HomeWork1")
-    st.write("請上傳您的CSV文件.")
+# ---------------------------------------------------------------------------------------------------------------
+    # HomeWork1分頁
+    elif st.session_state.selected_tab == "HomeWork1":
+        st.title("HomeWork1")  # 設定標題
+        st.write("請上傳您的CSV文件.")  # 顯示提示文字
 
-    file = st.file_uploader("選擇文件", type=['csv'])
-    if file is not None:
-        df = pd.read_csv(file)
-        st.write("以下是您上傳的數據：")
-        st.write(df)
+        # 文件上傳功能，限制文件格式為 CSV
+        file = st.file_uploader("選擇文件", type=['csv'])
+    
+        if file is not None:
+            # 讀取上傳的 CSV 文件並顯示
+            df = pd.read_csv(file)
+            st.write("以下是您上傳的數據：")
+            st.write(df)  # 顯示上傳的數據
 
-        selected_column = st.selectbox("選擇要繪製的列", df.columns)
-        # 绘制折线图
-        st.subheader("折線圖")
-        st.write("以下是", selected_column, "的折線圖：")
-        st.line_chart(df[selected_column])
+            # 提供下拉選單供使用者選擇需要繪圖的列
+            selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
-        # 绘制面积图
-        st.subheader("面積圖")
-        st.write("以下是", selected_column, "的面積圖：")
-        st.area_chart(df[selected_column])
-        
-        # 绘制条形图
-        st.subheader("長條圖")
-        st.write("以下是", selected_column, "的長條圖：")
-        st.bar_chart(df[selected_column])
+            # 繪製折線圖
+            st.subheader("折線圖")
+            st.write("以下是", selected_column, "的折線圖：")
+            st.line_chart(df[selected_column])
 
-        # 绘制散点图
-        st.subheader("散點圖")
-        st.write("以下是", selected_column, "的散點圖：")
-        st.scatter_chart(df[selected_column])
+            # 繪製面積圖
+            st.subheader("面積圖")
+            st.write("以下是", selected_column, "的面積圖：")
+            st.area_chart(df[selected_column])
+
+            # 繪製長條圖
+            st.subheader("長條圖")
+            st.write("以下是", selected_column, "的長條圖：")
+            st.bar_chart(df[selected_column])
+
+            # 繪製散點圖
+            st.subheader("散點圖")
+            st.write("以下是", selected_column, "的散點圖：")
+            st.scatter_chart(df[selected_column])
