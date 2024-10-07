@@ -6,6 +6,7 @@ from PIL import Image  # 從 PIL 庫匯入 Image 模組，用於處理圖像
 import datetime  # 匯入 datetime 庫，用於時間和日期的操作
 
 import openai
+import os
 
 # 定義頁籤選項
 # 此處建立了一個包含三個頁籤名稱的清單，每個頁籤代表不同的網頁內容
@@ -396,34 +397,60 @@ elif st.session_state.selected_tab == "HomeWork1":
 elif st.session_state.selected_tab == "HomeWork2":
     st.title("HomeWork2  之  連接Chat GPT")  # 顯示標題
 
-    api_key = st.secrets["openai_api_key"]
+
+
+
+
+
+    # 設置頁面配置
+    st.set_page_config(page_title="ChatGPT-like clone")
+
+    # 設置 API 金鑰
+    api_key = st.secrets["OPENAI_API_KEY"]
     openai.api_key = api_key
 
-    user_input = st.text_input("請輸入訊息")
-    if st.button("送出"):
-    # 將使用者的訊息傳送給聊天機器人
-        pass
+    # 初始化應用狀態
+    if "openai_model" not in st.session_state:
+        st.session_state["openai_model"] = "gpt-3.5-turbo"  # 使用聊天模型
 
-    # 將使用者的訊息傳送給聊天機器人並獲得回覆
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=user_input,
-        max_tokens=50
-    )
-
-    # 顯示聊天機器人的回覆
-    st.write("聊天機器人：", response.choices[0].text)
-
-    # 追蹤對話紀錄
     if "messages" not in st.session_state:
-        st.session_state["messages"] = []
+        st.session_state.messages = []
     
-    # 新增使用者的訊息到對話紀錄
-    st.session_state["messages"].append({
-        "role": "user",
-        "content": user_input
-    })
+    # 聊天輸入框
+    if prompt := st.chat_input("What is up?"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-    # 顯示對話紀錄
-    for message in st.session_state["messages"]:
-        st.chat_message(message)
+        with st.chat_message("assistant"):
+            try:
+                # 使用 ChatCompletion API 呼叫聊天模型
+                response = openai.ChatCompletion.create(
+                    model=st.session_state["openai_model"],
+                    messages=st.session_state.messages
+                )
+                # 提取助手回應
+                assistant_reply = response['choices'][0]['message']['content']
+                st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
+                st.markdown(assistant_reply)
+
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
+
+    # 聊天記錄上限提示
+    if len(st.session_state.messages) >= 20:  # 假設設定了 20 條訊息為上限
+        st.info(
+            """Notice: The maximum message limit for this demo version has been reached. 
+            We encourage you to build your own application using Streamlit's tutorial."""
+         )
+
+
+
+
+
+
+
+
+
+
+
