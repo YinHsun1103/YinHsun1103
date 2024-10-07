@@ -41,4 +41,8 @@ if prompt := st.chat_input("What is up?"):
             st.error(f"An error occurred: {e}")
 
 # 提示用戶達到訊息上限
-if len(st
+if len(st.session_state.messages) >= st.session_state.max_messages:
+    st.info(
+        """Notice: The maximum message limit for this demo version has been reached.
+        Thank you for your interest!"""
+    )
