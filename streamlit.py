@@ -392,3 +392,5 @@ elif st.session_state.selected_tab == "HomeWork1":
             st.scatter_chart(df[selected_column])
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork2":
+    st.title("HomeWork2")  # 例如顯示標題
+    st.write("這是 Homework2 的內容")  # 這是作為 HomeWork2 的預設內容
