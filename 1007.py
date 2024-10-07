@@ -5,24 +5,18 @@ import numpy as np
 from PIL import Image
 import datetime
 
+# Define the tab options
+tabs = ["Steamlit练习", "HomeWork1"]
+
 # Initialize session state if necessary
 if "selected_tab" not in st.session_state:
-    st.session_state.selected_tab = "Steamlit练习"
+    st.session_state.selected_tab = tabs[0]
 
-# Define the tab options and use session state to store the selected tab
-tabs = ["Steamlit练习", "HomeWork1"]
-st.session_state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
-
-# Page content based on the selected tab
-if st.session_state.selected_tab == "Steamlit练习":
-    st.title("Steamlit练习")
-    # (Place your "Steamlit练习" content here)
-
-elif st.session_state.selected_tab == "HomeWork1":
-    st.title("HomeWork1")
-    # (Place your "HomeWork1" content here)
-
-
+# Sidebar tab selection and immediate session state update
+selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
+if selected_tab != st.session_state.selected_tab:
+    st.session_state.selected_tab = selected_tab
+    st.experimental_rerun()  # Rerun the app immediately to reflect the new tab selection
 
 # Page content based on the selected tab
 if st.session_state.selected_tab == "Steamlit练习":
@@ -79,6 +73,28 @@ if st.session_state.selected_tab == "Steamlit练习":
         ],
     }
     st.json(data)
+
+    # Displaying an image (make sure 'S__24829963.jpg' exists in the app's directory)
+    image = Image.open('S__24829963.jpg')
+    st.image(image, caption='這是一隻阿拉斯加的照片')
+
+    # Metric example
+    st.metric(label="溫度", value="30 °C", delta="1.2 °C")
+
+    # Download button
+    data = {
+        'Column1': [1, 2, 3, 4, 5],
+        'Column2': ['A', 'B', 'C', 'D', 'E']
+    }
+    my_large_df = pd.DataFrame(data)
+
+    @st.cache_data
+    def convert_df(df):
+        return df.to_csv(index=False).encode('utf-8')
+
+    csv = convert_df(my_large_df)
+    st.download_button(label="dataframe下載成csv", data=csv, file_name='large_df.csv', mime='text/csv')
+
 
     # Displaying an image (make sure 'S__24829963.jpg' exists in the app's directory)
     image = Image.open('S__24829963.jpg')
