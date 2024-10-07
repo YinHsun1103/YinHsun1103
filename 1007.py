@@ -7,16 +7,22 @@ import datetime
 
 # Initialize session state if necessary
 if "selected_tab" not in st.session_state:
-    st.session_state.selected_tab = "Steamlit練習"
+    st.session_state.selected_tab = "Steamlit练习"
 
-# 创建选项卡
+# Define the tab options and use session state to store the selected tab
 tabs = ["Steamlit练习", "HomeWork1"]
-if "selected_tab" not in state:
+st.session_state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(st.session_state.selected_tab))
 
-    state.selected_tab = st.sidebar.radio("选择页面", tabs, index=tabs.index(state.selected_tab))
+# Page content based on the selected tab
+if st.session_state.selected_tab == "Steamlit练习":
+    st.title("Steamlit练习")
+    # (Place your "Steamlit练习" content here)
 
-# Save the selected tab to session state
-st.session_state.selected_tab = selected_tab
+elif st.session_state.selected_tab == "HomeWork1":
+    st.title("HomeWork1")
+    # (Place your "HomeWork1" content here)
+
+
 
 # Page content based on the selected tab
 if st.session_state.selected_tab == "Steamlit练习":
