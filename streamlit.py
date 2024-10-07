@@ -355,7 +355,7 @@ if st.session_state.selected_tab == "Steamlit練習":
 
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork1分頁
-    elif st.session_state.selected_tab == "HomeWork1":
+elif st.session_state.selected_tab == "HomeWork1":
         st.title("HomeWork1")  # 設定標題
         st.write("請上傳您的CSV文件.")  # 顯示提示文字
 
