@@ -316,7 +316,7 @@ if st.session_state.selected_tab == "Steamlit練習":
     # 設定自動發信的時間
     t = st.time_input('設定自動發信的時間', value=None, step=3600)
     st.write('自動發信時間', t)
-#-----------------------------------------------------------------------------------------------------------------------------------------
+
     # 建立三欄佈局
     col1, col2, col3 = st.columns(3)
 
@@ -390,3 +390,5 @@ elif st.session_state.selected_tab == "HomeWork1":
             st.subheader("散點圖")
             st.write("以下是", selected_column, "的散點圖：")
             st.scatter_chart(df[selected_column])
+#-----------------------------------------------------------------------------------------------------------------------------------------
+elif st.session_state.selected_tab == "HomeWork2":
