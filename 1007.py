@@ -12,14 +12,6 @@ api_key = st.secrets["OPENAI_API_KEY"]
 
 
 
-
-
-
-
-
-
-
-
 import random
 import pandas as pd
 import numpy as np
