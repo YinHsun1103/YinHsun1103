@@ -6,7 +6,7 @@ from PIL import Image
 import datetime
 
 # Define the tab options
-tabs = ["Steamlit练习", "HomeWork1"]
+tabs = ["Steamlit练习", "HomeWork1", "HomeWork2"]
 
 # Initialize session state if necessary
 if "selected_tab" not in st.session_state:
