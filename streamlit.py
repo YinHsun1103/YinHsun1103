@@ -356,7 +356,7 @@ if st.session_state.selected_tab == "Steamlit練習":
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork1分頁
 elif st.session_state.selected_tab == "HomeWork1":
-        st.title("HomeWork1")  # 設定標題
+        st.title("HomeWork1之可上傳CSV檔")  # 設定標題
         st.write("請上傳您的CSV文件.")  # 顯示提示文字
 
         # 文件上傳功能，限制文件格式為 CSV
@@ -392,5 +392,5 @@ elif st.session_state.selected_tab == "HomeWork1":
             st.scatter_chart(df[selected_column])
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork2":
-    st.title("HomeWork2")  # 例如顯示標題
-    st.write("這是 Homework2 的內容")  # 這是作為 HomeWork2 的預設內容
+    st.title("HomeWork2之連接Chat GPT")  # 顯示標題
+
