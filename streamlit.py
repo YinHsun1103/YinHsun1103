@@ -10,13 +10,12 @@ import os      # 匯入 os 庫，用於操作系統層級的功能，例如環�
 
 # 設置頁面配置
 st.set_page_config(page_title="ChatGPT-like clone")
-# 設置頁面配置
-st.set_page_config(page_title="HomeWork3 + GPT 問答")
+
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
 # 定義頁籤選項
 # 此處建立了一個包含三個頁籤名稱的清單，每個頁籤代表不同的網頁內容
-tabs = ["Steamlit練習", "HomeWork1", "HomeWork2", "HomeWork3"]
+tabs = ["Steamlit練習", "HomeWork1", "HomeWork2"]
 
 # 初始化 session state
 # 檢查 "selected_tab" 是否已在 session_state 中，若無則進行初始化
@@ -449,72 +448,6 @@ elif st.session_state.selected_tab == "HomeWork2":
         )  # 當訊息達到上限時，顯示提示訊息
 
 
-#-----------------------------------------------------------------------------------------------------------------------------------------
-elif st.session_state.selected_tab == "HomeWork3":
-
-
-    # 設置 API 金鑰
-    api_key = st.secrets["OPENAI_API_KEY"]
-    openai.api_key = api_key
-
-    # 初始化應用狀態
-    if "openai_model" not in st.session_state:
-        st.session_state["openai_model"] = "gpt-3.5-turbo"
-
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    # 顯示標題
-    st.title("HomeWork1 + GPT 問答")
-
-    # 上傳 CSV 文件
-    st.write("請上傳您的 CSV 文件。")
-    file = st.file_uploader("選擇文件", type=['csv'])
-
-    if file is not None:
-        # 讀取並顯示 CSV 文件
-        df = pd.read_csv(file)
-        st.write("以下是您上傳的數據：")
-        st.write(df)
-
-        # 提供下拉選單讓用戶選擇列來進行分析或生成問題
-        selected_column = st.selectbox("選擇要提問的數據列", df.columns)
-
-        # 顯示整個聊天紀錄
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-
-        # 聊天輸入框
-        if prompt := st.chat_input("對數據列發問吧！"):
-            # 添加用戶輸入的訊息到訊息列表
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
-
-            # 呼叫 OpenAI API 以獲取助手回應
-            with st.chat_message("assistant"):
-                try:
-                    # 使用提問內容並包含數據列內容進行回應
-                    question = f"{prompt} Here is the data in the selected column:\n{df[selected_column].to_string(index=False)}"
-                    response = openai.ChatCompletion.create(
-                        model=st.session_state["openai_model"],
-                        messages=st.session_state.messages + [{"role": "user", "content": question}]
-                    )
-                    assistant_reply = response['choices'][0]['message']['content']
-                    # 添加助手的回應到訊息列表
-                    st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
-                    st.markdown(assistant_reply)
-
-                except Exception as e:
-                    st.error(f"An error occurred: {e}")
-
-        # 聊天記錄上限提示
-        if len(st.session_state.messages) >= 20:
-            st.info("Notice: The maximum message limit for this demo version has been reached.")
-
-    else:
-        st.warning("請先上傳 CSV 文件以便開始使用 GPT 問答功能。")
 
 
 
