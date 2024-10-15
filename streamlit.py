@@ -10,7 +10,8 @@ import os      # 匯入 os 庫，用於操作系統層級的功能，例如環�
 
 # 設置頁面配置
 st.set_page_config(page_title="ChatGPT-like clone")
-
+# 設置頁面配置
+st.set_page_config(page_title="HomeWork3 + GPT 問答")
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
 # 定義頁籤選項
@@ -450,8 +451,7 @@ elif st.session_state.selected_tab == "HomeWork2":
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork3":
-    # 設置頁面配置
-    st.set_page_config(page_title="HomeWork1 + GPT 問答")
+
 
     # 設置 API 金鑰
     api_key = st.secrets["OPENAI_API_KEY"]
