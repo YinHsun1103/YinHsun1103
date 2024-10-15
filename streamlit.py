@@ -8,13 +8,6 @@ import openai  # 匯入 OpenAI 庫，用於與 OpenAI 的 API 進行互動，例
 import os      # 匯入 os 庫，用於操作系統層級的功能，例如環境變數管理、文件路徑操作等
 
 
-import matplotlib.pyplot as plt
-import requests
-from io import BytesIO
-
-
-
-
 # 設置頁面配置
 st.set_page_config(page_title="ChatGPT-like clone")
 
