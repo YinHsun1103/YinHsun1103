@@ -21,8 +21,6 @@ selected_tab = st.sidebar.radio("選擇頁面", tabs)
 
 st.session_state.selected_tab = selected_tab
 
-if st.session_state.selected_tab == "Steamlit練習":
-    # 你之前的 Steamlit 練習代碼在這裡
 
 # ---------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork1":
