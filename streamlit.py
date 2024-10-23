@@ -404,7 +404,8 @@ elif st.session_state.selected_tab == "HomeWork2":
 
     # 設置 API 金鑰
     openai.api_key = "sk-svcacct-fb_-GzpFTmE6wtv222EkZdGrZrVUnZdTIP-AkvTvtcxO8n7D-tZvHHAL6ChEGT3BlbkFJCwdg-PbyzjyhbVo99UJNUKYTHayGD-I0QpeVibX_K7x6F8UE9Q7j0flr-VmAA"  # 從 Streamlit 秘密配置中取得 OpenAI API 金鑰
-    openai.api_base = "https://api.openai.com/v1/chat/completions \"# 設定 OpenAI 的 API 金鑰，使應用可以呼叫 OpenAI API
+    openai.api_base = "https://api.openai.com/v1/chat/completions"  # 設定 OpenAI 的 API 金鑰，使應用可以呼叫 OpenAI API
+
 
     # 初始化應用狀態
     if "openai_model" not in st.session_state:
