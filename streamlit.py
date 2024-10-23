@@ -22,12 +22,7 @@ selected_tab = st.sidebar.radio("選擇頁面", tabs)
 st.session_state.selected_tab = selected_tab
 
 
-# ---------------------------------------------------------------------------------------------------------------
-elif st.session_state.selected_tab == "HomeWork1":
-    # 你之前的 HomeWork1 上傳 CSV 代碼在這裡
-
-#-----------------------------------------------------------------------------------------------------------------------------------------
-elif st.session_state.selected_tab == "HomeWork2":
+st.session_state.selected_tab == "HomeWork2":
     st.title("HomeWork2 之 連接Chat GPT")
 
     # 設置 API 金鑰
