@@ -21,12 +21,78 @@ selected_tab = st.sidebar.radio("選擇頁面", tabs)
 
 st.session_state.selected_tab = selected_tab
 
+# 正確縮排的 Steamlit 練習部分
 if st.session_state.selected_tab == "Steamlit練習":
-    # 你之前的 Steamlit 練習代碼在這裡
+    st.title("Steamlit練習")
+    st.title('Hello, streamlit！我的第一支web應用程式開發!!!')
+    st.write('我是一個字串')
+    K = 9999
+    st.write(K)
+    dataframe = pd.DataFrame(np.random.randn(10, 20), columns=[f"col_{i}" for i in range(20)])
+    st.write(dataframe)
+    st.markdown("# 這是一個示例 Streamlit 網頁")
+    st.markdown('''
+        :red[Streamlit] :orange[can] :green[write] :blue[text] :violet[in]
+        :gray[pretty] :rainbow[colors].''')
+    st.markdown("Here's a bouquet &mdash; #:tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:")
+
+    st.title("歡迎來到我的網站")
+    st.title('_Streamlit_ is :blue[cool] :sunglasses:')
+    st.header("這是一個標頭", divider='rainbow')
+    st.header('_Streamlit_ is :blue[cool] :sunglasses:')
+    st.subheader("這是一個子標頭", divider='rainbow')
+    st.subheader('_Streamlit_ is :blue[cool] :sunglasses:')
+    st.caption("這是一張美麗的圖片")
+    st.caption('A caption with italics :blue[colors] and emojis :sunglasses:')
+    st.code("print('Hello, Streamlit!')")
+    code = '''def hello():
+        print("Hello, Streamlit!")'''
+    st.code(code, line_numbers=True)    
+    st.code(code, language='python')
+    st.text("這是一些純文字內容。")
+    st.latex(r"e^{i\pi} + 1 = 0")
+    st.latex(r'''
+        a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
+        \sum_{k=0}^{n-1} ar^k =
+        a \left(\frac{1-r^{n}}{1-r}\right)
+        ''')
+
+    st.divider()
+    st.write("慘了，我被夾在分隔線中間！")
+    st.divider()
+    df = pd.DataFrame(np.random.randn(10, 10), columns=("col %d" % i for i in range(10)))
+    st.dataframe(df)
+    st.dataframe(df.style.highlight_max(axis=0))
 
 # ---------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork1":
-    # 你之前的 HomeWork1 上傳 CSV 代碼在這裡
+    st.title("HomeWork1 之 可上傳CSV檔")
+    st.write("請上傳您的CSV文件.")
+
+    file = st.file_uploader("選擇文件", type=['csv'])
+    
+    if file is not None:
+        df = pd.read_csv(file)
+        st.write("以下是您上傳的數據：")
+        st.write(df)
+
+        selected_column = st.selectbox("選擇要繪製的列", df.columns)
+
+        st.subheader("折線圖")
+        st.write("以下是", selected_column, "的折線圖：")
+        st.line_chart(df[selected_column])
+
+        st.subheader("面積圖")
+        st.write("以下是", selected_column, "的面積圖：")
+        st.area_chart(df[selected_column])
+
+        st.subheader("長條圖")
+        st.write("以下是", selected_column, "的長條圖：")
+        st.bar_chart(df[selected_column])
+
+        st.subheader("散點圖")
+        st.write("以下是", selected_column, "的散點圖：")
+        st.scatter_chart(df[selected_column])
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork2":
