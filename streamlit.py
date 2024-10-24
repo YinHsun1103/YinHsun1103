@@ -364,40 +364,54 @@ if st.session_state.selected_tab == "Steamlit練習":
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork1分頁
 elif st.session_state.selected_tab == "HomeWork1":
-        st.title("HomeWork1  之  可上傳CSV檔")  # 設定標題
-        st.write("請上傳您的CSV文件.")  # 顯示提示文字
+    st.title("可上傳CSV/WORD/PDF/EXCEL 檔")  # 設定標題
+    st.write("請上傳您的文件.")  # 顯示提示文字
 
-        # 文件上傳功能，限制文件格式為 CSV
-        file = st.file_uploader("選擇文件", type=['csv'])
-    
-        if file is not None:
-            # 讀取上傳的 CSV 文件並顯示
+    # 文件上傳功能，限制文件格式為 CSV, DOCX, PDF, EXCEL
+    file = st.file_uploader("選擇文件", type=['csv', 'docx', 'pdf', 'xlsx'])
+
+    if file is not None:
+        file_type = file.name.split('.')[-1].lower()
+
+        if file_type == 'csv':
+            # 處理 CSV 文件
             df = pd.read_csv(file)
-            st.write("以下是您上傳的數據：")
-            st.write(df)  # 顯示上傳的數據
+            st.write("以下是您上傳的 CSV 數據：")
+            st.write(df)
 
-            # 提供下拉選單供使用者選擇需要繪圖的列
             selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
-            # 繪製折線圖
             st.subheader("折線圖")
-            st.write("以下是", selected_column, "的折線圖：")
             st.line_chart(df[selected_column])
 
-            # 繪製面積圖
-            st.subheader("面積圖")
-            st.write("以下是", selected_column, "的面積圖：")
-            st.area_chart(df[selected_column])
+        elif file_type == 'xlsx':
+            # 處理 Excel 文件
+            df = pd.read_excel(file)
+            st.write("以下是您上傳的 EXCEL 數據：")
+            st.write(df)
 
-            # 繪製長條圖
-            st.subheader("長條圖")
-            st.write("以下是", selected_column, "的長條圖：")
-            st.bar_chart(df[selected_column])
+            selected_column = st.selectbox("選擇要繪製的列", df.columns)
 
-            # 繪製散點圖
-            st.subheader("散點圖")
-            st.write("以下是", selected_column, "的散點圖：")
-            st.scatter_chart(df[selected_column])
+            st.subheader("折線圖")
+            st.line_chart(df[selected_column])
+
+        elif file_type == 'docx':
+            # 處理 Word 文件
+            doc = docx.Document(file)
+            full_text = []
+            for para in doc.paragraphs:
+                full_text.append(para.text)
+            st.write("以下是您上傳的 Word 文件內容：")
+            st.write("\n".join(full_text))
+
+        elif file_type == 'pdf':
+            # 處理 PDF 文件
+            pdf_reader = PyPDF2.PdfReader(file)
+            pdf_text = ""
+            for page_num in range(len(pdf_reader.pages)):
+                pdf_text += pdf_reader.pages[page_num].extract_text()
+            st.write("以下是您上傳的 PDF 文件內容：")
+            st.write(pdf_text)
 #-----------------------------------------------------------------------------------------------------------------------------------------
 elif st.session_state.selected_tab == "HomeWork2":
     st.title("HomeWork2 之 連接Chat GPT")  # 顯示標題
