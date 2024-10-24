@@ -396,9 +396,8 @@ elif st.session_state.selected_tab == "HomeWork1":
             st.line_chart(df[selected_column])
 
         elif file_type == 'docx':
-            # 處理 Word 文件
-            file_bytes = io.BytesIO(file.read())  # 將文件轉換為 BytesIO
-            doc = docx.Document(file_bytes)  # 使用 BytesIO 來讀取文件
+            # 處理 Word 文件，直接使用 file 來讀取
+            doc = docx.Document(file)
             full_text = []
             for para in doc.paragraphs:
                 full_text.append(para.text)
