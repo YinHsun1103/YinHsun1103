@@ -15,7 +15,7 @@ st.set_page_config(page_title="ChatGPT-like clone")
 
 # 定義頁籤選項
 # 此處建立了一個包含三個頁籤名稱的清單，每個頁籤代表不同的網頁內容
-tabs = ["Steamlit練習", "HomeWork1", "HomeWork2"]
+tabs = ["Steamlit練習", "HomeWork1", "HomeWork2", "HomeWork3"]
 
 # 初始化 session state
 # 檢查 "selected_tab" 是否已在 session_state 中，若無則進行初始化
@@ -463,6 +463,8 @@ elif st.session_state.selected_tab == "HomeWork2":
         )  # 當訊息達到上限時，顯示提示訊息
 
 
-
+# ---------------------------------------------------------------------------------------------------------------
+    # HomeWork1分頁
+elif st.session_state.selected_tab == "HomeWork1":
 
 
