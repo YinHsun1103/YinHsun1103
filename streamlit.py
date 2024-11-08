@@ -465,136 +465,131 @@ elif st.session_state.selected_tab == "HomeWork2":
 
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork1分頁
-elif st.session_state.selected_tab == "HomeWork1":
+elif st.session_state.selected_tab == "HomeWork3":
 
-import requests
-import streamlit as st
-import pandas as pd
-from io import StringIO
+    # 初始化 Streamlit 介面
+    st.title("ChatGPT 3.5")
+    st.write("與 ChatGPT 互動，並可上傳檔案讓 AI 分析！")
 
-# 初始化 Streamlit 介面
-st.title("ChatGPT 3.5")
-st.write("與 ChatGPT 互動，並可上傳檔案讓 AI 分析！")
+    # 使用提供的 ChatGPT Anywhere API Key
+    api_key = "sk-sn2pqwgmTx9RGn0QZk8DMvrLmPrgESWssPoKtI5GUTRojsGE"
+    api_url = "https://api.chatanywhere.tech/v1/chat/completions"
 
-# 使用提供的 ChatGPT Anywhere API Key
-api_key = "sk-sn2pqwgmTx9RGn0QZk8DMvrLmPrgESWssPoKtI5GUTRojsGE"
-api_url = "https://api.chatanywhere.tech/v1/chat/completions"
+    # 初始化 session_state 來儲存聊天記錄
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = [{"role": "system", "content": "你是一個幫助解答問題的助手，請用繁體中文回答。"}]
 
-# 初始化 session_state 來儲存聊天記錄
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "system", "content": "你是一個幫助解答問題的助手，請用繁體中文回答。"}]
+    # 上傳檔案，支援 txt, pdf, docx, csv, pptx
+    uploaded_file = st.file_uploader("上傳檔案", type=["txt", "pdf", "docx", "csv", "pptx"])
 
-# 上傳檔案，支援 txt, pdf, docx, csv, pptx
-uploaded_file = st.file_uploader("上傳檔案", type=["txt", "pdf", "docx", "csv", "pptx"])
+    # 使用者輸入問題
+    user_input = st.text_area("請輸入您的問題：", placeholder="輸入訊息後按下 '送出'")
 
-# 使用者輸入問題
-user_input = st.text_area("請輸入您的問題：", placeholder="輸入訊息後按下 '送出'")
+    # 定義訊息樣式
+    def format_user_message(message):
+        return f"""
+        <div style='background-color: #d3d3d3; padding: 10px; border-radius: 20px; margin: 10px 0;'>
+            <strong>你：</strong> {message}
+        </div>
+        """
 
-# 定義訊息樣式
-def format_user_message(message):
-    return f"""
-    <div style='background-color: #d3d3d3; padding: 10px; border-radius: 20px; margin: 10px 0;'>
-        <strong>你：</strong> {message}
-    </div>
-    """
+    def format_ai_message(message):
+        return f"""
+        <div style='background-color: #d4f7d4; padding: 10px; border-radius: 20px; margin: 10px 0;'>
+            <strong>AI：</strong> {message}
+        </div>
+        """
 
-def format_ai_message(message):
-    return f"""
-    <div style='background-color: #d4f7d4; padding: 10px; border-radius: 20px; margin: 10px 0;'>
-        <strong>AI：</strong> {message}
-    </div>
-    """
+    # 讀取上傳檔案的內容，移除 py 的處理邏輯
+    def read_uploaded_file(file):
+        if file is not None:
+            try:
+                # 根據檔案類型處理
+                if file.type == "text/plain":  # txt 檔案
+                    return file.read().decode("utf-8")
+                elif file.type == "application/pdf":
+                    import PyPDF2
+                    pdf_reader = PyPDF2.PdfReader(file)
+                    text = ""
+                    for page in range(len(pdf_reader.pages)):
+                        text += pdf_reader.pages[page].extract_text()
+                    return text
+                elif file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                    import docx
+                    doc = docx.Document(file)
+                    text = "\n".join([para.text for para in doc.paragraphs])
+                    return text
+                elif file.type == "text/csv":
+                    df = pd.read_csv(file)
+                    return df.to_string()  # 轉成可讀取的文字
+                elif file.type == "application/vnd.openxmlformats-officedocument.presentationml.presentation":  # pptx
+                    from pptx import Presentation
+                    prs = Presentation(file)
+                    text = ""
+                    for slide in prs.slides:
+                        for shape in slide.shapes:
+                            if hasattr(shape, "text"):
+                                text += shape.text + "\n"
+                    return text
+                else:
+                    return "無法解析該檔案格式。"
+            except Exception as e:
+                return f"讀取檔案時發生錯誤：{e}"
+        return None
 
-# 讀取上傳檔案的內容，移除 py 的處理邏輯
-def read_uploaded_file(file):
-    if file is not None:
-        try:
-            # 根據檔案類型處理
-            if file.type == "text/plain":  # txt 檔案
-                return file.read().decode("utf-8")
-            elif file.type == "application/pdf":
-                import PyPDF2
-                pdf_reader = PyPDF2.PdfReader(file)
-                text = ""
-                for page in range(len(pdf_reader.pages)):
-                    text += pdf_reader.pages[page].extract_text()
-                return text
-            elif file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                import docx
-                doc = docx.Document(file)
-                text = "\n".join([para.text for para in doc.paragraphs])
-                return text
-            elif file.type == "text/csv":
-                df = pd.read_csv(file)
-                return df.to_string()  # 轉成可讀取的文字
-            elif file.type == "application/vnd.openxmlformats-officedocument.presentationml.presentation":  # pptx
-                from pptx import Presentation
-                prs = Presentation(file)
-                text = ""
-                for slide in prs.slides:
-                    for shape in slide.shapes:
-                        if hasattr(shape, "text"):
-                            text += shape.text + "\n"
-                return text
-            else:
-                return "無法解析該檔案格式。"
-        except Exception as e:
-            return f"讀取檔案時發生錯誤：{e}"
-    return None
+    # 分析上傳檔案的內容
+    file_content = read_uploaded_file(uploaded_file)
 
-# 分析上傳檔案的內容
-file_content = read_uploaded_file(uploaded_file)
+    # 按鈕觸發 API 請求
+    if st.button("送出"):
+        if not user_input.strip():
+            st.error("請輸入問題")
+        else:
+            # 儲存使用者的問題到 session_state
+            st.session_state["messages"].append({"role": "user", "content": user_input})
 
-# 按鈕觸發 API 請求
-if st.button("送出"):
-    if not user_input.strip():
-        st.error("請輸入問題")
-    else:
-        # 儲存使用者的問題到 session_state
-        st.session_state["messages"].append({"role": "user", "content": user_input})
+            # 如果有上傳檔案的內容，將其加入到問題中
+            if file_content:
+                st.session_state["messages"].append({"role": "user", "content": f"這是上傳的檔案內容：{file_content}"})
 
-        # 如果有上傳檔案的內容，將其加入到問題中
-        if file_content:
-            st.session_state["messages"].append({"role": "user", "content": f"這是上傳的檔案內容：{file_content}"})
+            # 設定 API 請求的 headers 和 payload
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            }
 
-        # 設定 API 請求的 headers 和 payload
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        }
+            # Payload 用於 API 請求
+            data = {
+                "model": "gpt-3.5-turbo",
+                "messages": st.session_state["messages"],
+                "max_tokens": 2000
+            }
 
-        # Payload 用於 API 請求
-        data = {
-            "model": "gpt-3.5-turbo",
-            "messages": st.session_state["messages"],
-            "max_tokens": 2000
-        }
+            try:
+                # 發送 API 請求
+                response = requests.post(api_url, headers=headers, json=data)
 
-        try:
-            # 發送 API 請求
-            response = requests.post(api_url, headers=headers, json=data)
-
-            # 檢查請求是否成功
-            if response.status_code == 200:
-                response_json = response.json()
-                answer = response_json['choices'][0]['message']['content']
+                # 檢查請求是否成功
+                if response.status_code == 200:
+                    response_json = response.json()
+                    answer = response_json['choices'][0]['message']['content']
                 
-                # 儲存 AI 回應到 session_state
-                st.session_state["messages"].append({"role": "assistant", "content": answer})
+                    # 儲存 AI 回應到 session_state
+                    st.session_state["messages"].append({"role": "assistant", "content": answer})
 
-            else:
-                st.error(f"API 調用失敗：狀態碼 {response.status_code}，錯誤訊息：{response.text}")
+                else:
+                    st.error(f"API 調用失敗：狀態碼 {response.status_code}，錯誤訊息：{response.text}")
 
-        except Exception as e:
-            st.error(f"發生錯誤：{e}")
+            except Exception as e:
+                st.error(f"發生錯誤：{e}")
 
-# 顯示歷史對話串，反轉順序讓新的對話顯示在上方
-if st.session_state["messages"]:
-    st.write("### 歷史對話：")
-    for msg in reversed(st.session_state["messages"]):  # 反向顯示對話串
-        if msg["role"] == "user":
-            st.markdown(format_user_message(msg['content']), unsafe_allow_html=True)
-        elif msg["role"] == "assistant":
-            st.markdown(format_ai_message(msg['content']), unsafe_allow_html=True)
+    # 顯示歷史對話串，反轉順序讓新的對話顯示在上方
+    if st.session_state["messages"]:
+        st.write("### 歷史對話：")
+        for msg in reversed(st.session_state["messages"]):  # 反向顯示對話串
+            if msg["role"] == "user":
+                st.markdown(format_user_message(msg['content']), unsafe_allow_html=True)
+            elif msg["role"] == "assistant":
+                st.markdown(format_ai_message(msg['content']), unsafe_allow_html=True)
 
 
