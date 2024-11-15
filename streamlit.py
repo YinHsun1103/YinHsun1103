@@ -1,4 +1,4 @@
-pip install python-docx
+
 git add requirements.txt
 git commit -m "Add python-docx to requirements"
 git push origin main
