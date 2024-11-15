@@ -10,6 +10,7 @@ pip install python-docx
 git add requirements.txt
 git commit -m "Add python-docx to requirements"
 git push origin main
+pip install -r requirements.txt
 
 
 # 設置頁面配置
