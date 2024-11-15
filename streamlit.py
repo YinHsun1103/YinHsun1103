@@ -1,3 +1,11 @@
+pip install python-docx
+git add requirements.txt
+git commit -m "Add python-docx to requirements"
+git push origin main
+pip install -r requirements.txt
+
+
+
 import streamlit as st  # 匯入 Streamlit 庫，用於創建網頁應用
 import random  # 匯入 random 庫，提供隨機數生成功能
 import pandas as pd  # 匯入 Pandas 庫，用於資料處理與分析
@@ -6,11 +14,7 @@ from PIL import Image  # 從 PIL 庫匯入 Image 模組，用於處理圖像
 import datetime  # 匯入 datetime 庫，用於時間和日期的操作
 import openai  # 匯入 OpenAI 庫，用於與 OpenAI 的 API 進行互動，例如 GPT 模型的使用
 import os      # 匯入 os 庫，用於操作系統層級的功能，例如環境變數管理、文件路徑操作等
-pip install python-docx
-git add requirements.txt
-git commit -m "Add python-docx to requirements"
-git push origin main
-pip install -r requirements.txt
+
 
 
 # 設置頁面配置
