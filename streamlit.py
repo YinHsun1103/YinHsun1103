@@ -608,7 +608,7 @@ elif st.session_state.selected_tab == "HomeWork3":
             data = {
                 "model": "gpt-3.5-turbo",
                 "messages": st.session_state["messages"],
-                "max_tokens": 4096
+                "max_tokens": 10000
             }
 
             try:
