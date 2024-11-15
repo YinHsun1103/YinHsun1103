@@ -469,7 +469,50 @@ elif st.session_state.selected_tab == "HomeWork2":
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork3分頁
 elif st.session_state.selected_tab == "HomeWork3":
+    # 加入自訂樣式的 HTML 和 CSS
+    st.markdown("""
+        <style>
+            .main-title {
+                background-color: #4CAF50;
+                color: white;
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+            }
+            div.stButton > button {
+                background-color: #FF6347;
+                color: white;
+                font-size: 16px;
+                padding: 10px 20px;
+                border-radius: 10px;
+            }
+            div.stFileUploader {
+                border: 2px dashed #4CAF50;
+                padding: 15px;
+                border-radius: 10px;
+                margin: 15px 0;
+            }
+            .message {
+                margin: 10px 0;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .user-message {
+                background-color: #f0f0f0;
+            }
+            .ai-message {
+                background-color: #d4f7d4;
+            }
+        </style>
+    """, unsafe_allow_html=True)
 
+    # 標題區
+    st.markdown("""
+        <div class="main-title">
+            <h1>可上傳檔案讓 AI 分析</h1>
+        </div>
+    """, unsafe_allow_html=True)
     # 初始化 Streamlit 介面
     st.title("可上傳檔案讓 AI 分析")
     
