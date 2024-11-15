@@ -471,8 +471,8 @@ elif st.session_state.selected_tab == "HomeWork2":
 elif st.session_state.selected_tab == "HomeWork3":
 
     # 初始化 Streamlit 介面
-    st.title("ChatGPT 3.5")
-    st.write("與 ChatGPT 互動，並可上傳檔案讓 AI 分析！")
+    st.title("可上傳檔案讓 AI 分析")
+    
 
     # 使用提供的 ChatGPT Anywhere API Key
     api_key = "sk-UebxWPd44CJnjYPWt3e85ogp7DOqXSj2AuGEUarE9NjUckni"
