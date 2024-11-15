@@ -1,11 +1,4 @@
 
-git add requirements.txt
-git commit -m "Add python-docx to requirements"
-git push origin main
-pip install -r requirements.txt
-
-
-
 import streamlit as st  # 匯入 Streamlit 庫，用於創建網頁應用
 import random  # 匯入 random 庫，提供隨機數生成功能
 import pandas as pd  # 匯入 Pandas 庫，用於資料處理與分析
