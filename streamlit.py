@@ -469,12 +469,11 @@ elif st.session_state.selected_tab == "HomeWork2":
 # ---------------------------------------------------------------------------------------------------------------
     # HomeWork3分頁
 elif st.session_state.selected_tab == "HomeWork3":
-
-    # Set up page layout
+    # Set page configuration as the first command
     st.set_page_config(page_title="HomeWork3 Chat Assistant", layout="wide")
-    st.sidebar.title("HomeWork3 Settings")
 
     # Sidebar options
+    st.sidebar.title("HomeWork3 Settings")
     st.sidebar.write("上傳檔案讓 AI 分析：")
     uploaded_file = st.sidebar.file_uploader("上傳檔案", type=["txt", "pdf", "docx", "csv", "pptx"])
 
