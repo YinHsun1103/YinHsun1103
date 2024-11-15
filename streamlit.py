@@ -8,6 +8,7 @@ import datetime  # 匯入 datetime 庫，用於時間和日期的操作
 import openai  # 匯入 OpenAI 庫，用於與 OpenAI 的 API 進行互動，例如 GPT 模型的使用
 import os      # 匯入 os 庫，用於操作系統層級的功能，例如環境變數管理、文件路徑操作等
 
+import requests
 
 
 # 設置頁面配置
