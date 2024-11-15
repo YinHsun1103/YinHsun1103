@@ -514,7 +514,7 @@ elif st.session_state.selected_tab == "HomeWork3":
         </div>
     """, unsafe_allow_html=True)
     # 初始化 Streamlit 介面
-    st.title("可上傳檔案讓 AI 分析")
+    st.write("可上傳一個檔案(txt.pdf.docx.csv.pptx)讓GPT為您做分析")
     
 
     # 使用提供的 ChatGPT Anywhere API Key
