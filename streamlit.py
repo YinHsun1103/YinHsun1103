@@ -606,7 +606,7 @@ elif st.session_state.selected_tab == "HomeWork3":
 
             # Payload 用於 API 請求
             data = {
-                "model": "gpt-3.5-turbo",
+                "model": "gpt-4o-mini",
                 "messages": st.session_state["messages"],
                 "max_tokens": 10000
             }
