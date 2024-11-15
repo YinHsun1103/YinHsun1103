@@ -475,7 +475,7 @@ elif st.session_state.selected_tab == "HomeWork3":
     st.write("與 ChatGPT 互動，並可上傳檔案讓 AI 分析！")
 
     # 使用提供的 ChatGPT Anywhere API Key
-    api_key = "sk-dQJiSeqwDQvKNEsaj0yxqOV1qrhLwOjF8xECrknX7XT3BlbkFJC-8ynjk7JigzcY4UtKXWNMzh283k74JEx3OYdocY4A"
+    api_key = "sk-UebxWPd44CJnjYPWt3e85ogp7DOqXSj2AuGEUarE9NjUckni"
     api_url = "https://api.chatanywhere.tech/v1/chat/completions"
 
     # 初始化 session_state 來儲存聊天記錄
