@@ -649,112 +649,112 @@ elif st.session_state.selected_tab == "HomeWork4":
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-st.title("與助理聊天")
+    st.title("與助理聊天")
 
-# 在側邊欄中設定助理的參數
-with st.sidebar:
-    st.header("助理設定")
-    assistant_id = st.text_input("請輸入助理 ID", "asst_abc123")
-    new_name = st.text_input("新的助理名稱", "Helper")
-    new_instructions = st.text_area("助理指令", "You are an assistant, and you have access to files to answer user questions.")
-    model = st.selectbox("選擇模型", ["gpt-4o", "gpt-3.5-turbo"])
-    temperature = st.slider("溫度設定", min_value=0.0, max_value=2.0, value=1.0)
+    # 在側邊欄中設定助理的參數
+    with st.sidebar:
+        st.header("助理設定")
+        assistant_id = st.text_input("請輸入助理 ID", "asst_abc123")
+        new_name = st.text_input("新的助理名稱", "Helper")
+        new_instructions = st.text_area("助理指令", "You are an assistant, and you have access to files to answer user questions.")
+        model = st.selectbox("選擇模型", ["gpt-4o", "gpt-3.5-turbo"])
+        temperature = st.slider("溫度設定", min_value=0.0, max_value=2.0, value=1.0)
     
-    # 設定 max_tokens 預設值為 150
-    max_tokens = st.number_input("最大 token 數", min_value=1, max_value=4096, value=150)
+        # 設定 max_tokens 預設值為 150
+        max_tokens = st.number_input("最大 token 數", min_value=1, max_value=4096, value=150)
 
-    # 檔案上傳
-    uploaded_file = st.file_uploader("請上傳檔案", type=['txt', 'pdf', 'jsonl', 'csv'])
+        # 檔案上傳
+        uploaded_file = st.file_uploader("請上傳檔案", type=['txt', 'pdf', 'jsonl', 'csv'])
 
-    # 按鈕用來發送請求更新助理
-    if st.button("更新助理"):
-        try:
-            # 上傳檔案
-            file_id = None
-            if uploaded_file is not None:
+        # 按鈕用來發送請求更新助理
+        if st.button("更新助理"):
+            try:
+                # 上傳檔案
+                file_id = None
+                if uploaded_file is not None:
+                    # 將上傳的檔案傳送到 OpenAI
+                    file_response = client.files.create(
+                        file=uploaded_file,
+                        purpose="assistants"
+                    )
+                    st.success("檔案上傳成功！")
+                    file_id = file_response['id']  # 獲取檔案 ID
+            
+                # 發送更新請求到 OpenAI API
+                my_updated_assistant = client.beta.assistants.update(
+                    assistant_id,
+                    instructions=new_instructions,
+                    name=new_name,
+                    model=model,
+                    tools=[{"type": "file_search", "file_id": file_id}] if file_id else []  # 確保有檔案 ID 才添加
+                )
+            
+                # 顯示更新後的助理信息
+                st.write("助理更新成功！")
+                st.json(my_updated_assistant)
+        
+            except Exception as e:
+                st.error(f"更新助理時發生錯誤: {e}")
+    
+    # 聊天功能
+    st.subheader("ChatGPT 聊天機器人")
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # 顯示歷史消息
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # 如果有上傳的檔案，讀取內容並提供給助理分析
+    if uploaded_file is not None:
+        if uploaded_file.type == "text/plain":
+            file_content = uploaded_file.read().decode("utf-8")
+        elif uploaded_file.type == "application/pdf":
+            import PyPDF2
+            pdf_reader = PyPDF2.PdfReader(uploaded_file)
+            file_content = ""
+            for page in pdf_reader.pages:
+                file_content += page.extract_text()
+        elif uploaded_file.type == "application/json":
+            import json
+            file_content = json.load(uploaded_file)
+            file_content = json.dumps(file_content)  # 將 JSON 轉換為字串
+        elif uploaded_file.type == "text/csv":
+            # 如果是 CSV 檔案，使用 pandas 讀取
+            file_content = pd.read_csv(uploaded_file).to_string(index=False)
+
+        # 準備用於分析的訊息
+        if uploaded_file is not None:
+            try:
                 # 將上傳的檔案傳送到 OpenAI
                 file_response = client.files.create(
                     file=uploaded_file,
-                    purpose="assistants"
+                    purpose="assistants"  # 設定目的為助理
                 )
                 st.success("檔案上傳成功！")
-                file_id = file_response['id']  # 獲取檔案 ID
-            
-            # 發送更新請求到 OpenAI API
-            my_updated_assistant = client.beta.assistants.update(
-                assistant_id,
-                instructions=new_instructions,
-                name=new_name,
+                file_id = file_response.get('id')  # 獲取檔案 ID
+                st.write(f"檔案 ID: {file_id}")
+            except Exception as e:
+                st.error(f"上傳檔案時發生錯誤: {e}")
+        else:
+            st.warning("請選擇一個檔案上傳！")
+
+    # 用戶輸入問題
+    if prompt := st.chat_input("請輸入您的問題:"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            response = client.chat.completions.create(
                 model=model,
-                tools=[{"type": "file_search", "file_id": file_id}] if file_id else []  # 確保有檔案 ID 才添加
+                messages=st.session_state.messages,
+                temperature=temperature,
+                max_tokens=max_tokens  # 使用側邊欄設定的最大 token 數
             )
-            
-            # 顯示更新後的助理信息
-            st.write("助理更新成功！")
-            st.json(my_updated_assistant)
+            full_response = response.choices[0].message.content.strip()
+            st.markdown(full_response)
         
-        except Exception as e:
-            st.error(f"更新助理時發生錯誤: {e}")
-
-# 聊天功能
-st.subheader("ChatGPT 聊天機器人")
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# 顯示歷史消息
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-# 如果有上傳的檔案，讀取內容並提供給助理分析
-if uploaded_file is not None:
-    if uploaded_file.type == "text/plain":
-        file_content = uploaded_file.read().decode("utf-8")
-    elif uploaded_file.type == "application/pdf":
-        import PyPDF2
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
-        file_content = ""
-        for page in pdf_reader.pages:
-            file_content += page.extract_text()
-    elif uploaded_file.type == "application/json":
-        import json
-        file_content = json.load(uploaded_file)
-        file_content = json.dumps(file_content)  # 將 JSON 轉換為字串
-    elif uploaded_file.type == "text/csv":
-        # 如果是 CSV 檔案，使用 pandas 讀取
-        file_content = pd.read_csv(uploaded_file).to_string(index=False)
-
-    # 準備用於分析的訊息
-    if uploaded_file is not None:
-        try:
-            # 將上傳的檔案傳送到 OpenAI
-            file_response = client.files.create(
-                file=uploaded_file,
-                purpose="assistants"  # 設定目的為助理
-            )
-            st.success("檔案上傳成功！")
-            file_id = file_response.get('id')  # 獲取檔案 ID
-            st.write(f"檔案 ID: {file_id}")
-        except Exception as e:
-            st.error(f"上傳檔案時發生錯誤: {e}")
-    else:
-        st.warning("請選擇一個檔案上傳！")
-
-# 用戶輸入問題
-if prompt := st.chat_input("請輸入您的問題:"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    with st.chat_message("assistant"):
-        response = client.chat.completions.create(
-            model=model,
-            messages=st.session_state.messages,
-            temperature=temperature,
-            max_tokens=max_tokens  # 使用側邊欄設定的最大 token 數
-        )
-        full_response = response.choices[0].message.content.strip()
-        st.markdown(full_response)
-        
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
