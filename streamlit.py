@@ -645,8 +645,7 @@ elif st.session_state.selected_tab == "HomeWork3":
     # HomeWork4分頁
 elif st.session_state.selected_tab == "HomeWork4":
 
-    # 請使用你的 API 金鑰
-OPENAI_API_KEY = 'sk-UebxWPd44CJnjYPWt3e85ogp7DOqXSj2AuGEUarE9NjUckni'
+
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
