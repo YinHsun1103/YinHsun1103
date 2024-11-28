@@ -652,7 +652,7 @@ elif st.session_state.selected_tab == "HomeWork4":
 
     client = OpenAI(api_key=OPENAI_API_KEY)
 
-        st.title("與助理聊天")
+    st.title("與助理聊天")
 
         # 在側邊欄中設定助理的參數
         with st.sidebar:
