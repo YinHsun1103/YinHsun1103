@@ -646,7 +646,8 @@ elif st.session_state.selected_tab == "HomeWork3":
 elif st.session_state.selected_tab == "HomeWork4":
     # 請使用你的 API 金鑰
     OPENAI_API_KEY = 'sk-UebxWPd44CJnjYPWt3e85ogp7DOqXSj2AuGEUarE9NjUckni'
-    client = OpenAI(api_key=OPENAI_API_KEY)
+    # 設定 OpenAI 的 API 金鑰
+    openai.api_key = OPENAI_API_KEY
 
 
     st.title("與助理聊天")
